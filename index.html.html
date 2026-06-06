@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Devousamoijobbing – Services Premium · Pointe-Noire</title>
+<style>
+:root{--bg:#080808;--bg2:#141414;--bg3:#1E1E1E;--or:#F5C518;--vert:#1A6B3C;--blanc:#F8F8F8;--texte:#AAAAAA;--bord:rgba(255,255,255,0.07);}
+[data-theme="light"]{--bg:#F2F2ED;--bg2:#fff;--bg3:#E8E8E3;--or:#C9960A;--vert:#1A6B3C;--blanc:#111;--texte:#555;--bord:rgba(0,0,0,0.09);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--blanc);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden;}
+
+/* SCROLL PROGRESS */
+#sp{position:fixed;top:0;left:0;height:3px;background:var(--or);z-index:9999;width:0;transition:width .1s;}
+
+/* CURSOR GLOW */
+#cg{position:fixed;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(245,197,24,.05) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:left .06s,top .06s;}
+
+/* TICKER */
+.ticker{background:var(--or);padding:9px 0;overflow:hidden;}
+.ticker-inner{display:flex;width:max-content;animation:tick 35s linear infinite;}
+.ticker-inner:hover{animation-play-state:paused;}
+.ti{white-space:nowrap;padding:0 36px;font-size:11px;font-weight:800;color:#080808;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+.td{width:4px;height:4px;background:#080808;border-radius:50%;opacity:.3;}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* NAV */
+nav{position:fixed;top:33px;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 52px;background:rgba(8,8,8,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(245,197,24,.08);transition:box-shadow .3s;}
+nav.sc{box-shadow:0 4px 30px rgba(0,0,0,.5);}
+[data-theme="light"] nav{background:rgba(242,242,237,.97);}
+.nl{display:flex;gap:22px;list-style:none;}
+.nl a{color:var(--texte);text-decoration:none;font-size:11px;letter-spacing:1px;text-transform:uppercase;transition:.3s;}
+.nl a:hover,.nl a.active{color:var(--or);}
+.nr{display:flex;align-items:center;gap:8px;}
+.th-wrap{display:flex;align-items:center;gap:5px;}
+.th{position:relative;width:42px;height:22px;}
+.th input{opacity:0;width:0;height:0;position:absolute;}
+.th-sl{position:absolute;inset:0;background:var(--bg3);border-radius:22px;cursor:pointer;transition:.3s;border:1px solid var(--bord);}
+.th-sl::before{content:'';position:absolute;width:16px;height:16px;left:3px;top:2px;background:var(--or);border-radius:50%;transition:.3s;}
+.th input:checked+.th-sl::before{transform:translateX(19px);}
+.ns{width:28px;height:28px;border:1px solid var(--bord);border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--texte);text-decoration:none;transition:.3s;}
+.ns:hover{border-color:var(--or);color:var(--or);}
+.nc{background:var(--or);color:#080808;padding:8px 18px;border-radius:4px;font-size:11px;font-weight:700;text-decoration:none;letter-spacing:1px;text-transform:uppercase;}
+.hb{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:transparent;border:1px solid var(--bord);border-radius:6px;}
+.hb span{display:block;width:20px;height:2px;background:var(--blanc);border-radius:2px;transition:.3s;}
+.hb.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hb.open span:nth-child(2){opacity:0;}
+.hb.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mm{position:fixed;inset:0;background:var(--bg2);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transform:translateX(100%);transition:.35s ease;}
+.mm.open{transform:translateX(0);}
+.mm a{font-size:20px;font-weight:700;color:var(--blanc);text-decoration:none;letter-spacing:2px;text-transform:uppercase;}
+.mm a:hover{color:var(--or);}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:150px 60px 80px;gap:60px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(26,107,60,.12) 0%,transparent 60%);pointer-events:none;}
+/* Particles */
+.particle{position:absolute;width:2px;height:2px;background:var(--or);border-radius:50%;pointer-events:none;animation:floatUp 8s infinite;}
+@keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(0)}15%{opacity:.5}85%{opacity:.1}100%{opacity:0;transform:translateY(-100vh) scale(2)}}
+.htag{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(245,197,24,.25);padding:6px 14px;border-radius:40px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:24px;}
+.hdot{width:6px;height:6px;background:var(--vert);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-size:clamp(32px,4.5vw,62px);font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:20px;}
+.hero h1 em{font-style:normal;color:var(--or);}
+.hsub{font-size:15px;color:var(--texte);line-height:1.75;margin-bottom:36px;max-width:460px;}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-or{background:var(--or);color:#080808;padding:13px 28px;border-radius:4px;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:opacity .3s,transform .3s;display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden;}
+.btn-or::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);transform:scaleX(0);transform-origin:left;transition:.4s;}
+.btn-or:hover{opacity:.9;transform:translateY(-2px);}
+.btn-or:hover::after{transform:scaleX(1);}
+.btn-gh{border:1px solid var(--bord);color:var(--blanc);padding:13px 28px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:.3s;}
+.btn-gh:hover{border-color:var(--or);color:var(--or);}
+.hstats{display:flex;gap:32px;margin-top:48px;padding-top:40px;border-top:1px solid var(--bord);flex-wrap:wrap;}
+.stat h3{font-size:28px;font-weight:900;color:var(--or);}
+.stat p{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--texte);margin-top:2px;}
+/* Hero mosaic */
+.hmosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:10px;position:relative;}
+.hm1{grid-column:1;grid-row:1/3;height:320px;object-fit:cover;border-radius:8px;width:100%;}
+.hm2{grid-column:2;grid-row:1;height:155px;object-fit:cover;border-radius:8px;width:100%;}
+.hm3{grid-column:2;grid-row:2;height:155px;object-fit:cover;border-radius:8px;width:100%;}
+.hbadge{position:absolute;bottom:16px;left:16px;background:rgba(8,8,8,.88);backdrop-filter:blur(12px);border:1px solid rgba(245,197,24,.2);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:10px;}
+.hbi{width:36px;height:36px;background:var(--vert);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.hbadge p{font-size:12px;font-weight:700;color:#fff;}
+.hbadge span{font-size:10px;color:var(--or);}
+
+/* MARQUEE */
+.mq-section{padding:44px 0;background:var(--bg2);overflow:hidden;position:relative;}
+.mq-section::before,.mq-section::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.mq-section::before{left:0;background:linear-gradient(to right,var(--bg2),transparent);}
+.mq-section::after{right:0;background:linear-gradient(to left,var(--bg2),transparent);}
+.mq-label{text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:18px;}
+.mq-track{display:flex;width:max-content;animation:mq 24s linear infinite;gap:12px;}
+.mq-track:hover{animation-play-state:paused;}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.mc{background:var(--bg3);border:1px solid var(--bord);border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:12px;white-space:nowrap;cursor:pointer;transition:border-color .3s,transform .3s,box-shadow .3s;flex-shrink:0;}
+.mc:hover{border-color:rgba(245,197,24,.3);transform:translateY(-4px);box-shadow:0 12px 32px rgba(245,197,24,.1);}
+.mc-i{font-size:22px;}
+.mc-n{font-size:13px;font-weight:700;}
+.mc-p{font-size:11px;color:var(--or);margin-top:1px;}
+.mc-b{background:var(--or);color:#080808;font-size:8px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:6px;}
+
+/* SECTIONS */
+.sec{padding:88px 60px;position:relative;}
+.sec.bg2{background:var(--bg2);}
+.stag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--or);margin-bottom:10px;}
+.stitle{font-size:clamp(22px,3.5vw,42px);font-weight:900;line-height:1.1;margin-bottom:16px;}
+.ssub{font-size:14px;color:var(--texte);line-height:1.75;max-width:480px;}
+.gl{width:52px;height:2px;background:var(--or);margin:16px 0;}
+.cx{text-align:center;}.cx .gl{margin:16px auto;}.cx .ssub{margin:0 auto;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px;}
+.svc{position:relative;overflow:hidden;cursor:pointer;}
+.svc:first-child{border-radius:8px 0 0 8px;}
+.svc:last-child{border-radius:0 8px 8px 0;}
+.svc-img{width:100%;height:400px;object-fit:cover;display:block;transition:transform .6s;}
+.svc:hover .svc-img{transform:scale(1.05);}
+.svc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.94) 0%,rgba(8,8,8,.3) 55%,transparent 100%);transition:.4s;}
+.svc:hover .svc-ov{background:linear-gradient(to top,rgba(8,8,8,.97) 0%,rgba(8,8,8,.5) 65%,rgba(26,107,60,.12) 100%);}
+.svc-body{position:absolute;bottom:0;left:0;right:0;padding:26px 22px;}
+.svc-num{font-size:10px;font-weight:700;color:var(--or);letter-spacing:2px;margin-bottom:7px;}
+.svc-tag{display:inline-block;background:rgba(26,107,60,.7);border:1px solid rgba(26,107,60,.5);padding:3px 10px;border-radius:20px;font-size:9px;font-weight:700;color:#fff;margin-bottom:9px;letter-spacing:1px;}
+.svc-body h3{font-size:19px;font-weight:900;margin-bottom:8px;}
+.svc-body p{font-size:12px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:14px;}
+.svc-items{display:flex;flex-direction:column;gap:5px;max-height:0;overflow:hidden;transition:.4s;}
+.svc:hover .svc-items{max-height:200px;}
+.svc-item{font-size:11px;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:7px;}
+.svc-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--or);flex-shrink:0;}
+
+/* MATÉRIEL */
+.mat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:48px;}
+.mat{background:var(--bg2);border:1px solid var(--bord);border-radius:8px;overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .35s;}
+.mat:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(245,197,24,.1);border-color:rgba(245,197,24,.25);}
+.mat img{width:100%;height:140px;object-fit:cover;display:block;}
+.mat-body{padding:14px 16px;}
+.mat-name{font-size:13px;font-weight:700;margin-bottom:3px;}
+.mat-desc{font-size:11px;color:var(--texte);line-height:1.5;}
+.mat-badge{font-size:9px;font-weight:700;color:var(--or);letter-spacing:1px;text-transform:uppercase;margin-top:6px;display:block;}
+
+/* AVANT/APRÈS */
+.ba-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:52px;}
+.ba{border-radius:8px;overflow:hidden;}
+.ba-imgs{display:grid;grid-template-columns:1fr 1fr;gap:2px;position:relative;}
+.ba-img{width:100%;height:175px;object-fit:cover;display:block;}
+.ba-lbl{position:absolute;top:10px;padding:3px 10px;border-radius:0 4px 4px 0;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;}
+.ba-bef{left:0;background:rgba(200,60,60,.85);color:#fff;}
+.ba-aft{right:0;background:rgba(26,107,60,.85);color:#fff;border-radius:4px 0 0 4px;}
+.ba-foot{background:var(--bg2);padding:13px 16px;border:1px solid var(--bord);border-top:none;}
+.ba-foot h4{font-size:13px;font-weight:700;margin-bottom:3px;}
+.ba-foot p{font-size:11px;color:var(--texte);}
+/* Eau sale proof */
+.eau-proof{margin-top:24px;background:var(--bg2);border:1px solid var(--bord);border-radius:10px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;padding:24px 28px;max-width:580px;margin-left:auto;margin-right:auto;}
+.eau-proof img{width:110px;height:110px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,100,100,.3);}
+
+/* TARIFS */
+.t-tabs{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap;}
+.t-tab{padding:8px 20px;border:1px solid var(--bord);border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:var(--texte);transition:.3s;}
+.t-tab.active,.t-tab:hover{background:var(--or);color:#080808;border-color:var(--or);}
+.t-panel{display:none;}.t-panel.active{display:block;}
+.t-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;}
+.t-cat{background:var(--bg2);border:1px solid var(--bord);border-radius:8px;overflow:hidden;}
+.t-head{padding:14px 18px;background:var(--vert);display:flex;align-items:center;gap:9px;}
+.t-head h4{font-size:13px;font-weight:800;color:#fff;}
+.t-row{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-bottom:1px solid var(--bord);font-size:12px;gap:8px;}
+.t-row:last-child{border-bottom:none;}
+.t-row span:last-child{font-weight:700;color:var(--or);white-space:nowrap;}
+.t-promo{background:rgba(245,197,24,.07);border:1px solid rgba(245,197,24,.15);border-radius:8px;padding:16px 18px;margin-top:14px;display:flex;align-items:flex-start;gap:12px;}
+.t-promo p{font-size:13px;line-height:1.6;color:var(--texte);}
+.t-promo strong{color:var(--or);}
+
+/* CALCULATEUR */
+.calc{background:var(--bg2);border:1px solid var(--bord);border-radius:12px;padding:36px;max-width:640px;margin:48px auto 0;}
+.cg2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.cf{display:flex;flex-direction:column;gap:7px;}
+.cf label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);}
+.cf select,.cf input{background:var(--bg);border:1px solid var(--bord);color:var(--blanc);padding:11px 13px;font-size:13px;border-radius:6px;outline:none;transition:.3s;font-family:inherit;width:100%;-webkit-appearance:none;}
+.cf select:focus,.cf input:focus{border-color:var(--or);}
+.c-res{margin-top:20px;background:rgba(245,197,24,.06);border:1px solid rgba(245,197,24,.15);border-radius:8px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+.c-price{font-size:clamp(22px,4vw,30px);font-weight:900;color:var(--or);}
+.c-btn{width:100%;background:var(--or);color:#080808;padding:13px;border:none;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-top:14px;transition:.3s;position:relative;overflow:hidden;}
+.c-btn:hover{opacity:.9;}
+.dbadges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+.db{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;}
+.db1{background:rgba(26,107,60,.15);border:1px solid rgba(26,107,60,.3);color:#4ade80;}
+.db2{background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.2);color:var(--or);}
+
+/* RDV */
+.rdv-info{display:flex;flex-direction:column;gap:12px;}
+.ri{background:var(--bg2);border:1px solid var(--bord);border-radius:8px;padding:16px 18px;}
+.ri h4{font-size:13px;font-weight:700;margin-bottom:4px;}
+.ri p{font-size:12px;color:var(--texte);line-height:1.6;}
+.rcal{background:rgba(26,107,60,.1);border:1px solid rgba(26,107,60,.25);border-radius:8px;padding:14px 16px;}
+.rcal p{font-size:12px;color:var(--texte);line-height:1.6;}
+.rcal strong{color:#4ade80;}
+.rdv-list-box{background:var(--bg2);border:1px solid var(--bord);border-radius:8px;padding:16px;}
+.rdv-list-box h4{font-size:12px;font-weight:700;margin-bottom:10px;color:var(--or);}
+.rdv-list{display:flex;flex-direction:column;gap:7px;max-height:180px;overflow-y:auto;}
+.rdv-item{background:var(--bg3);border-radius:6px;padding:9px 12px;font-size:11px;line-height:1.6;border-left:3px solid var(--vert);}
+.rdv-empty{font-size:12px;color:var(--texte);font-style:italic;}
+.btn-wa{background:var(--vert);color:#fff;padding:12px 24px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:.3s;display:inline-flex;align-items:center;justify-content:center;gap:8px;}
+.btn-wa:hover{opacity:.85;transform:translateY(-2px);}
+
+/* FORM */
+.fbox{background:var(--bg2);padding:30px;border-radius:10px;border:1px solid var(--bord);}
+.fbox h3{font-size:16px;font-weight:800;margin-bottom:18px;}
+.fg{margin-bottom:13px;}
+.fg label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);display:block;margin-bottom:6px;}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--bg);border:1px solid var(--bord);color:var(--blanc);padding:11px 13px;font-size:13px;border-radius:6px;outline:none;transition:.3s;font-family:inherit;-webkit-appearance:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--or);}
+.fg textarea{resize:vertical;min-height:80px;}
+.fg select option{background:var(--bg2);}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fs{width:100%;background:var(--or);color:#080808;padding:12px;border:none;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:.3s;margin-top:4px;}
+.fs:hover{opacity:.85;}
+.file-wrap{position:relative;}
+.file-inp{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.file-lbl{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--bg);border:1px dashed rgba(245,197,24,.35);border-radius:6px;font-size:13px;color:var(--texte);cursor:pointer;transition:.3s;}
+.file-lbl:hover{border-color:var(--or);}
+.file-nm{font-size:11px;color:var(--vert);margin-top:4px;}
+
+/* AVIS */
+.avis-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:48px;}
+.av-card{background:var(--bg2);border:1px solid var(--bord);border-radius:10px;overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .35s;}
+.av-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.3);border-color:rgba(245,197,24,.2);}
+.av-photo{width:100%;height:140px;object-fit:cover;display:block;}
+.av-icon{width:100%;height:80px;display:flex;align-items:center;justify-content:center;font-size:32px;}
+.av-body{padding:20px;}
+.av-stars{color:var(--or);font-size:12px;letter-spacing:2px;margin-bottom:10px;}
+.av-text{font-size:12px;color:var(--texte);line-height:1.7;font-style:italic;margin-bottom:14px;}
+.av-name{font-size:13px;font-weight:700;}
+.av-role{font-size:10px;color:var(--or);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.av-svc{font-size:10px;color:var(--texte);margin-top:4px;}
+.avis-form{max-width:540px;margin:32px auto 0;background:var(--bg2);border:1px solid var(--bord);border-radius:10px;padding:26px;}
+.avis-form h3{font-size:15px;font-weight:800;margin-bottom:16px;}
+.si{display:flex;gap:5px;margin-bottom:14px;font-size:24px;cursor:pointer;}
+.si span{color:rgba(128,128,128,.3);transition:.2s;user-select:none;}
+.si span.active{color:var(--or);}
+
+/* POURQUOI */
+.why-feats{display:flex;flex-direction:column;gap:20px;margin-top:26px;}
+.wf{display:flex;gap:13px;align-items:flex-start;}
+.wfi{width:40px;height:40px;background:rgba(245,197,24,.07);border:1px solid rgba(245,197,24,.13);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.wfb h4{font-size:13px;font-weight:700;margin-bottom:3px;}
+.wfb p{font-size:12px;color:var(--texte);line-height:1.6;}
+.why-vis{background:var(--bg2);border:1px solid var(--bord);border-radius:10px;overflow:hidden;}
+.why-foot{padding:20px 22px;}
+.why-q{font-size:13px;font-style:italic;color:var(--blanc);line-height:1.65;}
+.why-q strong{color:var(--or);font-style:normal;font-weight:800;}
+.why-sig{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--bord);}
+.why-av{width:36px;height:36px;background:var(--vert);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff;flex-shrink:0;}
+
+/* PROCESS */
+.proc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:2px;margin-top:48px;}
+.proc{background:var(--bg2);padding:30px 22px;text-align:center;position:relative;transition:transform .3s,box-shadow .3s;}
+.proc:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(245,197,24,.08);}
+.proc-n{font-size:48px;font-weight:900;color:rgba(245,197,24,.05);position:absolute;top:10px;right:12px;line-height:1;}
+.proc-i{font-size:26px;margin-bottom:12px;}
+.proc h4{font-size:13px;font-weight:700;margin-bottom:7px;}
+.proc p{font-size:12px;color:var(--texte);line-height:1.6;}
+
+/* FAQ */
+.faq-list{max-width:720px;margin:48px auto 0;display:flex;flex-direction:column;gap:2px;}
+.fq{background:var(--bg2);border-left:3px solid transparent;transition:border-color .3s;}
+.fq.open{border-left-color:var(--or);}
+.fq-q{padding:19px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:13px;font-weight:700;gap:12px;transition:color .3s;}
+.fq-q:hover{color:var(--or);}
+.fq-arr{font-size:16px;color:var(--or);transition:.3s;flex-shrink:0;}
+.fq.open .fq-arr{transform:rotate(45deg);}
+.fq-a{max-height:0;overflow:hidden;transition:.4s ease;}
+.fq.open .fq-a{max-height:300px;}
+.fq-a p{padding:0 22px 18px;font-size:13px;color:var(--texte);line-height:1.7;}
+
+/* BLOG */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:48px;}
+.blog{background:var(--bg2);border:1px solid var(--bord);border-radius:10px;overflow:hidden;transition:transform .35s,box-shadow .35s,border-color .35s;}
+.blog:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.25);border-color:rgba(245,197,24,.2);}
+.blog img{width:100%;height:155px;object-fit:cover;display:block;}
+.blog-body{padding:18px;}
+.blog-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:7px;}
+.blog h4{font-size:13px;font-weight:800;margin-bottom:7px;line-height:1.4;}
+.blog p{font-size:12px;color:var(--texte);line-height:1.65;margin-bottom:12px;}
+.blog-read{font-size:11px;font-weight:700;color:var(--or);text-decoration:none;letter-spacing:1px;text-transform:uppercase;}
+
+/* CONTACT */
+.ci{display:flex;flex-direction:column;gap:13px;}
+.ci-it{display:flex;gap:12px;align-items:flex-start;}
+.ci-ic{width:38px;height:38px;background:rgba(245,197,24,.06);border:1px solid rgba(245,197,24,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.ci-it h5{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);margin-bottom:3px;}
+.ci-it p,.ci-it a{font-size:13px;color:var(--texte);text-decoration:none;line-height:1.5;}
+.ci-it a:hover{color:var(--or);}
+.soc-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.soc-btn{display:flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid var(--bord);border-radius:6px;text-decoration:none;color:var(--texte);font-size:11px;font-weight:600;transition:.3s;}
+.soc-btn:hover{border-color:var(--or);color:var(--or);}
+
+/* REJOINDRE */
+.jp-list{display:flex;flex-direction:column;gap:14px;margin-top:22px;}
+.jp{display:flex;gap:12px;}
+.jp-i{width:36px;height:36px;background:rgba(26,107,60,.15);border:1px solid rgba(26,107,60,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.jp-b h4{font-size:13px;font-weight:700;margin-bottom:2px;}
+.jp-b p{font-size:12px;color:var(--texte);line-height:1.6;}
+.cb{display:inline-flex;align-items:center;gap:6px;background:rgba(255,100,100,.1);border:1px solid rgba(255,100,100,.2);color:#ff8080;padding:4px 11px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:14px;}
+
+/* CTA */
+.cta{padding:96px 24px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(26,107,60,.16) 0%,transparent 70%);}
+.cta h2{font-size:clamp(26px,5vw,54px);font-weight:900;margin-bottom:14px;position:relative;}
+.cta p{font-size:14px;color:var(--texte);max-width:400px;margin:0 auto 30px;line-height:1.75;position:relative;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 22px;}
+.fi{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px;}
+.fb p{font-size:12px;color:var(--texte);line-height:1.7;margin-top:10px;max-width:220px;}
+.fs2{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap;}
+.fs2 a{width:30px;height:30px;border:1px solid var(--bord);border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--texte);text-decoration:none;transition:.3s;}
+.fs2 a:hover{border-color:var(--or);color:var(--or);}
+.fc h5{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:14px;}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.fc ul li a,.fc ul li span{color:var(--texte);text-decoration:none;font-size:12px;transition:.3s;cursor:pointer;}
+.fc ul li a:hover,.fc ul li span:hover{color:var(--or);}
+.fb-bot{border-top:1px solid var(--bord);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.fb-bot p{font-size:11px;color:rgba(128,128,128,.45);}
+
+/* MODALS */
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;display:none;align-items:center;justify-content:center;padding:16px;overflow-y:auto;}
+.mo.open{display:flex;}
+.mo-box{background:var(--bg2);border:1px solid var(--bord);border-radius:10px;max-width:660px;width:100%;max-height:90vh;overflow-y:auto;padding:30px;position:relative;}
+.mo-box h2{font-size:17px;font-weight:900;margin-bottom:14px;color:var(--or);padding-right:36px;}
+.mo-box h3{font-size:13px;font-weight:700;margin:16px 0 6px;}
+.mo-box p,.mo-box li{font-size:13px;color:var(--texte);line-height:1.75;margin-bottom:4px;}
+.mo-box ul{padding-left:16px;}
+.mo-cl{position:absolute;top:14px;right:14px;background:transparent;border:1px solid var(--bord);color:var(--texte);padding:5px 11px;border-radius:4px;cursor:pointer;font-size:11px;transition:.3s;}
+.mo-cl:hover{border-color:var(--or);color:var(--or);}
+
+/* SCROLL BTNS */
+.scr-btns{position:fixed;right:22px;bottom:88px;z-index:299;display:flex;flex-direction:column;gap:7px;}
+.scr-btn{width:38px;height:38px;background:var(--bg2);border:1px solid var(--bord);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--texte);font-size:14px;transition:border-color .3s,color .3s,transform .3s;box-shadow:0 2px 12px rgba(0,0,0,.4);}
+.scr-btn:hover{border-color:var(--or);color:var(--or);transform:scale(1.1);}
+
+/* CHATBOT */
+.chat-btn{position:fixed;bottom:22px;right:22px;z-index:300;width:50px;height:50px;background:var(--vert);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(26,107,60,.5);border:none;transition:transform .3s;}
+.chat-btn:hover{transform:scale(1.1);}
+.chat-btn::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(26,107,60,.35);animation:cpulse 2s infinite;}
+@keyframes cpulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.2);opacity:0}}
+.chat-btn svg{width:22px;height:22px;fill:#fff;}
+.cw{position:fixed;bottom:82px;right:22px;z-index:300;width:min(310px,calc(100vw - 32px));background:var(--bg2);border:1px solid var(--bord);border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(16px) scale(.97);transition:opacity .3s,transform .3s;}
+.cw.open{display:flex;opacity:1;transform:translateY(0) scale(1);}
+.ch{background:var(--vert);padding:11px 15px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.ch-av{width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.ch h4{font-size:12px;font-weight:700;color:#fff;}
+.ch p{font-size:10px;color:rgba(255,255,255,.7);}
+.ch-cl{margin-left:auto;background:transparent;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:16px;padding:4px;}
+.cm{flex:1;padding:13px;display:flex;flex-direction:column;gap:8px;height:230px;overflow-y:auto;}
+.msg{max-width:86%;font-size:12px;line-height:1.6;padding:8px 11px;border-radius:10px;}
+.msg.bot{background:var(--bg3);color:var(--blanc);border-bottom-left-radius:3px;align-self:flex-start;}
+.msg.user{background:var(--vert);color:#fff;border-bottom-right-radius:3px;align-self:flex-end;}
+.cq{padding:6px 13px;display:flex;flex-wrap:wrap;gap:5px;border-top:1px solid var(--bord);flex-shrink:0;}
+.cqb{padding:4px 8px;border:1px solid var(--bord);border-radius:20px;font-size:10px;cursor:pointer;background:transparent;color:var(--texte);transition:.3s;}
+.cqb:hover{border-color:var(--or);color:var(--or);}
+.cin-wrap{display:flex;gap:7px;padding:9px 13px;border-top:1px solid var(--bord);flex-shrink:0;}
+.cin{flex:1;background:var(--bg);border:1px solid var(--bord);color:var(--blanc);padding:7px 10px;border-radius:6px;font-size:12px;outline:none;font-family:inherit;min-width:0;}
+.cin:focus{border-color:var(--vert);}
+.csend{background:var(--vert);border:none;color:#fff;padding:7px 11px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;flex-shrink:0;}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--vert);color:#fff;padding:10px 18px;border-radius:6px;font-size:12px;font-weight:700;z-index:999;opacity:0;transition:.4s;pointer-events:none;max-width:calc(100vw - 40px);text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* REVEAL ANIMATIONS */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease;}
+.rv-l{opacity:0;transform:translateX(-44px);transition:opacity .7s ease,transform .7s ease;}
+.rv-r{opacity:0;transform:translateX(44px);transition:opacity .7s ease,transform .7s ease;}
+.rv-s{opacity:0;transform:scale(.93);transition:opacity .65s ease,transform .65s ease;}
+.rv.on,.rv-l.on,.rv-r.on,.rv-s.on{opacity:1;transform:none;}
+.d1{transition-delay:.1s!important;}.d2{transition-delay:.2s!important;}.d3{transition-delay:.3s!important;}
+.d4{transition-delay:.4s!important;}.d5{transition-delay:.5s!important;}.d6{transition-delay:.6s!important;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  nav{padding:12px 24px;}
+  .nl{gap:16px;}
+  .sec{padding:70px 32px;}
+  footer{padding:44px 32px 20px;}
+  .fi{grid-template-columns:1fr 1fr;gap:28px;}
+  .hero{grid-template-columns:1fr;padding:140px 32px 72px;}
+  .hmosaic{display:none;}
+  .svc-grid{grid-template-columns:1fr;}
+  .svc-img{height:280px;}
+  .svc:first-child,.svc:last-child{border-radius:8px;}
+}
+@media(max-width:768px){
+  nav{padding:10px 18px;top:33px;}
+  .nl,.ns{display:none;}
+  .hb{display:flex;}
+  .sec{padding:58px 18px;}
+  .g2{grid-template-columns:1fr;gap:24px;}
+  .fr2{grid-template-columns:1fr;}
+  .cg2{grid-template-columns:1fr;}
+  .hero{padding:136px 18px 58px;}
+  .hstats{gap:18px;}
+  .hbtns{flex-direction:column;align-items:flex-start;}
+  .btn-or,.btn-gh{width:100%;max-width:280px;text-align:center;justify-content:center;}
+  .mat-grid,.avis-grid,.blog-grid{grid-template-columns:1fr;}
+  .t-grid{grid-template-columns:1fr;}
+  .proc-grid{grid-template-columns:1fr 1fr;}
+  footer{padding:36px 18px 18px;}
+  .fi{grid-template-columns:1fr;gap:22px;}
+  .cw{bottom:80px;right:14px;left:14px;width:auto;}
+  .scr-btns{right:14px;bottom:86px;}
+  .mo-box{padding:20px 16px;}
+  .eau-proof{grid-template-columns:1fr;text-align:center;}
+}
+@media(max-width:380px){
+  .proc-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:28px;}
+}
+</style>
+</head>
+<body>
+
+<div id="sp"></div>
+<div id="cg"></div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ti">🧼 Nettoyage Pro <span class="td"></span></div>
+    <div class="ti">❄️ Climatisation Split <span class="td"></span></div>
+    <div class="ti">🛡️ Hygiène 3D <span class="td"></span></div>
+    <div class="ti">⚡ B2C : Réponse dans l'heure <span class="td"></span></div>
+    <div class="ti">✅ 150+ Clients Satisfaits <span class="td"></span></div>
+    <div class="ti">🏠 Maison Complète dès 50 000 FCFA <span class="td"></span></div>
+    <div class="ti">🔧 Matériel Kärcher Pro <span class="td"></span></div>
+    <div class="ti">📍 Pointe-Noire, Congo <span class="td"></span></div>
+    <div class="ti">🏆 RCCM Enregistré 2021 <span class="td"></span></div>
+    <div class="ti">🧼 Nettoyage Pro <span class="td"></span></div>
+    <div class="ti">❄️ Climatisation Split <span class="td"></span></div>
+    <div class="ti">🛡️ Hygiène 3D <span class="td"></span></div>
+    <div class="ti">⚡ B2C : Réponse dans l'heure <span class="td"></span></div>
+    <div class="ti">✅ 150+ Clients Satisfaits <span class="td"></span></div>
+    <div class="ti">🏠 Maison Complète dès 50 000 FCFA <span class="td"></span></div>
+    <div class="ti">🔧 Matériel Kärcher Pro <span class="td"></span></div>
+    <div class="ti">📍 Pointe-Noire, Congo <span class="td"></span></div>
+    <div class="ti">🏆 RCCM Enregistré 2021 <span class="td"></span></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#top" style="text-decoration:none;display:flex;align-items:center;">
+    <img src="https://i.ibb.co/Y75FSNY3/logo-optimis-dev.jpg" alt="Devousamoijobbing" style="height:38px;width:auto;object-fit:contain;border-radius:6px;"/>
+  </a>
+  <ul class="nl">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#tarifs">Tarifs</a></li>
+    <li><a href="#rdv">Réserver</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nr">
+    <div class="th-wrap">
+      <span>☀️</span>
+      <label class="th"><input type="checkbox" id="tc" onchange="applyTheme(this.checked)"/><span class="th-sl"></span></label>
+      <span>🌙</span>
+    </div>
+    <a href="https://facebook.com/devousamoijobbing" target="_blank" class="ns"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+    <a href="https://instagram.com/devousamoijobbing" target="_blank" class="ns"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://linkedin.com/company/devousamoijobbing" target="_blank" class="ns"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <a href="#rdv" class="nc">Réserver</a>
+    <button class="hb" id="hb" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MENU MOBILE -->
+<div class="mm" id="mm">
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#tarifs" onclick="closeMenu()">Tarifs</a>
+  <a href="#rdv" onclick="closeMenu()">Réserver</a>
+  <a href="#blog" onclick="closeMenu()">Blog</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#rejoindre" onclick="closeMenu()">Carrières</a>
+  <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+    <span>☀️</span>
+    <label class="th"><input type="checkbox" id="tcm" onchange="applyTheme(this.checked)"/><span class="th-sl"></span></label>
+    <span>🌙</span>
+  </div>
+  <a href="https://wa.me/242040612350" style="background:var(--or);color:#080808;padding:13px 32px;border-radius:4px;font-size:14px;font-weight:700;text-decoration:none;">WhatsApp →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <!-- particules injectées via JS -->
+  <div style="position:relative;z-index:1;">
+    <div class="htag rv"><span class="hdot"></span> Service Premium · Pointe-Noire, Congo</div>
+    <h1 class="rv d1">L'excellence<br/>du propre,<br/><em>à votre service.</em></h1>
+    <p class="hsub rv d2">Nettoyage professionnel au Kärcher SC4, climatisation split et hygiène 3D — matériel pro, résultats garantis à Pointe-Noire.</p>
+    <div class="hbtns rv d3">
+      <a href="#rdv" class="btn-or">📅 Prendre rendez-vous</a>
+      <a href="#tarifs" class="btn-gh">Voir les tarifs</a>
+    </div>
+    <div class="hstats">
+      <div class="stat rv d1"><h3 data-count="150" data-suffix="+">150+</h3><p>Clients satisfaits</p></div>
+      <div class="stat rv d2"><h3>3</h3><p>Piliers de service</p></div>
+      <div class="stat rv d3"><h3>&lt;1h</h3><p>Réactivité B2C</p></div>
+      <div class="stat rv d4"><h3 data-count="2021">2021</h3><p>Fondé à Pte-Noire</p></div>
+    </div>
+  </div>
+  <div class="hmosaic rv-r d2">
+    <img class="hm1" src="https://i.ibb.co/chwM4WF6/Chat-GPT-Image-12-avr-2026-07-50-52.png" alt="Techniciens Devousamoijobbing en action"/>
+    <img class="hm2" src="https://i.ibb.co/VYKkxg4t/Chat-GPT-Image-12-avr-2026-08-01-20.png" alt="Installation climatisation split"/>
+    <img class="hm3" src="https://i.ibb.co/TqHsmnks/Chat-GPT-Image-12-avr-2026-12-52-13.png" alt="Hygiène 3D dératisation"/>
+    <div class="hbadge">
+      <div class="hbi">🔧</div>
+      <div><p>Matériel Kärcher Pro</p><span>SC4 · K4 · WD5</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-section" id="populaires">
+  <p class="mq-label">Services les plus demandés</p>
+  <div class="mq-track">
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛋️</span><div><div class="mc-n">Canapé 3 places <span class="mc-b">⭐ Top</span></div><div class="mc-p">20 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛏️</span><div><div class="mc-n">Matelas 2 places <span class="mc-b">🔥</span></div><div class="mc-p">15 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛋️</span><div><div class="mc-n">Salon complet</div><div class="mc-p">dès 30 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">❄️</span><div><div class="mc-n">Entretien clim split</div><div class="mc-p">10 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🏠</span><div><div class="mc-n">Maison complète <span class="mc-b">Nouveau</span></div><div class="mc-p">dès 50 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🏗️</span><div><div class="mc-n">Fin de chantier</div><div class="mc-p">Sur devis</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🪑</span><div><div class="mc-n">Fauteuil</div><div class="mc-p">7 500 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🪟</span><div><div class="mc-n">Rideaux</div><div class="mc-p">5 000 FCFA/pièce</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛡️</span><div><div class="mc-n">Hygiène 3D</div><div class="mc-p">Sur devis</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛋️</span><div><div class="mc-n">Canapé 3 places <span class="mc-b">⭐ Top</span></div><div class="mc-p">20 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛏️</span><div><div class="mc-n">Matelas 2 places <span class="mc-b">🔥</span></div><div class="mc-p">15 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛋️</span><div><div class="mc-n">Salon complet</div><div class="mc-p">dès 30 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">❄️</span><div><div class="mc-n">Entretien clim split</div><div class="mc-p">10 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🏠</span><div><div class="mc-n">Maison complète <span class="mc-b">Nouveau</span></div><div class="mc-p">dès 50 000 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🏗️</span><div><div class="mc-n">Fin de chantier</div><div class="mc-p">Sur devis</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🪑</span><div><div class="mc-n">Fauteuil</div><div class="mc-p">7 500 FCFA</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🪟</span><div><div class="mc-n">Rideaux</div><div class="mc-p">5 000 FCFA/pièce</div></div></div>
+    <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛡️</span><div><div class="mc-n">Hygiène 3D</div><div class="mc-p">Sur devis</div></div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="stag rv">Nos expertises</div>
+  <h2 class="stitle rv d1">Trois piliers,<br/>une exigence unique.</h2>
+  <div class="gl rv d2"></div>
+  <div class="svc-grid">
+    <div class="svc rv d1">
+      <img class="svc-img" src="https://i.ibb.co/VYKkxg4t/Chat-GPT-Image-12-avr-2026-08-01-20.png" alt="Techniciens africains nettoyage professionnel"/>
+      <div class="svc-ov"></div>
+      <div class="svc-body">
+        <div class="svc-num">01</div><div class="svc-tag">Nettoyage</div>
+        <h3>Nettoyage Professionnel</h3>
+        <p>Canapés, matelas, tapis, maison — résultats visibles dès la première prestation.</p>
+        <div class="svc-items">
+          <div class="svc-item">Canapés & fauteuils</div>
+          <div class="svc-item">Matelas & literie</div>
+          <div class="svc-item">Tapis & rideaux</div>
+          <div class="svc-item">Maison complète (dès 50 000 FCFA)</div>
+          <div class="svc-item">Fin de chantier (sur devis)</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc rv d2">
+      <img class="svc-img" src="https://i.ibb.co/chwM4WF6/Chat-GPT-Image-12-avr-2026-07-50-52.png" alt="Technicien africain installation climatisation split"/>
+      <div class="svc-ov"></div>
+      <div class="svc-body">
+        <div class="svc-num">02</div><div class="svc-tag">Climatisation</div>
+        <h3>Climatisation Split</h3>
+        <p>Installation, entretien et dépannage de vos systèmes de climatisation.</p>
+        <div class="svc-items">
+          <div class="svc-item">Installation split (20 000 FCFA)</div>
+          <div class="svc-item">Entretien régulier (10 000 FCFA)</div>
+          <div class="svc-item">Dépannage sur devis</div>
+          <div class="svc-item">Diagnostic complet</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc rv d3">
+      <img class="svc-img" src="https://i.ibb.co/TqHsmnks/Chat-GPT-Image-12-avr-2026-12-52-13.png" alt="Technicien hygiène 3D dératisation désinfection"/>
+      <div class="svc-ov"></div>
+      <div class="svc-body">
+        <div class="svc-num">03</div><div class="svc-tag">Hygiène 3D</div>
+        <h3>Hygiène 3D</h3>
+        <p>Désinfection totale, dératisation et traitement — produits 100% naturels.</p>
+        <div class="svc-items">
+          <div class="svc-item">Désinfection complète</div>
+          <div class="svc-item">Dératisation</div>
+          <div class="svc-item">Dépigmentation</div>
+          <div class="svc-item">Traitement anti-nuisibles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATÉRIEL -->
+<section class="sec bg2" id="materiel">
+  <div class="cx">
+    <div class="stag rv">Notre arsenal professionnel</div>
+    <h2 class="stitle rv d1">Matériel Kärcher & Pro</h2>
+    <div class="gl rv d2"></div>
+    <p class="ssub rv d3">Nous investissons dans les meilleurs équipements pour des résultats sans compromis.</p>
+  </div>
+  <div class="mat-grid">
+    <div class="mat rv-s d1"><img src="https://i.ibb.co/qMfPkC0D/Nettoyeur-vap-dev.jpg" alt="Kärcher SC4"/><div class="mat-body"><div class="mat-name">Kärcher SC4 – Vapeur</div><div class="mat-desc">Nettoyeur vapeur haute température. Élimine 99,9% des bactéries. Canapés, matelas, tapis.</div><span class="mat-badge">🧼 Canapés · Matelas · Tapis</span></div></div>
+    <div class="mat rv-s d2"><img src="https://i.ibb.co/Gv0XphQB/Eau-sale.jpg" alt="Kärcher WD5 eau sale"/><div class="mat-body"><div class="mat-name">Kärcher WD5 – Extraction</div><div class="mat-desc">Cette eau noire, c'est ce qu'on extrait de vos meubles. L'aspirateur WD5 ne laisse rien passer.</div><span class="mat-badge">💧 Preuve d'efficacité</span></div></div>
+    <div class="mat rv-s d3"><img src="https://i.ibb.co/0y5dd76C/Whats-App-Image-2026-04-09-at-10-52-28.jpg" alt="Savon de Marseille 5L"/><div class="mat-body"><div class="mat-name">Savon de Marseille 5L</div><div class="mat-desc">100% naturel, sans produits chimiques agressifs. Respectueux de votre santé et de votre mobilier.</div><span class="mat-badge">🌿 100% Naturel</span></div></div>
+    <div class="mat rv-s d4"><img src="https://i.ibb.co/QFRQy777/Whats-App-Image-2026-04-09-at-10-46-01.jpg" alt="Savon noir bicarbonate"/><div class="mat-body"><div class="mat-name">Savon noir · Bicarbonate</div><div class="mat-desc">Savon noir 5L désodorisant + bicarbonate naturel. Actifs puissants, formule 100% douce.</div><span class="mat-badge">🌱 Éco-responsable</span></div></div>
+    <div class="mat rv-s d5"><img src="https://i.ibb.co/jFfngd5/Whats-App-Image-2026-04-09-at-10-46-00.jpg" alt="Polish microfibres APC"/><div class="mat-body"><div class="mat-name">Polish · Microfibres · APC</div><div class="mat-desc">Polish brillance, microfibres haute densité, nettoyant multi-surfaces APC. Finitions impeccables.</div><span class="mat-badge">✨ Finitions · Brillance</span></div></div>
+    <div class="mat rv-s d6"><img src="https://i.ibb.co/7FVyvzJ/Whats-App-Image-2026-04-05-at-01-40-21.jpg" alt="Technicien Devousamoijobbing"/><div class="mat-body"><div class="mat-name">EPI & Tenue Pro</div><div class="mat-desc">Gilet vert, casquette noire, gants noirs, surchaussures — nos techniciens sont identifiables et protégés.</div><span class="mat-badge">👷 Techniciens certifiés</span></div></div>
+  </div>
+</section>
+
+<!-- AVANT/APRÈS -->
+<section class="sec" id="avantapres">
+  <div class="cx">
+    <div class="stag rv">La preuve par l'image</div>
+    <h2 class="stitle rv d1">Avant / Après</h2>
+    <div class="gl rv d2"></div>
+    <p class="ssub rv d3">Des résultats concrets, visibles et mesurables sur chaque prestation.</p>
+  </div>
+  <div class="ba-grid">
+    <div class="ba rv-s d1">
+      <div class="ba-imgs"><span class="ba-lbl ba-bef">Avant</span><img class="ba-img" src="https://i.ibb.co/tTpBxLN0/avt-Canap.jpg" alt="Canapé avant"/><img class="ba-img" src="https://i.ibb.co/ycgkVg1m/Apr-s-Canap.jpg" alt="Canapé après"/><span class="ba-lbl ba-aft">Après</span></div>
+      <div class="ba-foot"><h4>🛋️ Canapé salon</h4><p>Kärcher SC4 vapeur · Savon noir</p></div>
+    </div>
+    <div class="ba rv-s d2">
+      <div class="ba-imgs"><span class="ba-lbl ba-bef">Avant</span><img class="ba-img" src="https://i.ibb.co/Pv6pndrz/avt-Mat.jpg" alt="Matelas avant"/><img class="ba-img" src="https://i.ibb.co/JwH5yq5F/Apr-s-Mat.jpg" alt="Matelas après"/><span class="ba-lbl ba-aft">Après</span></div>
+      <div class="ba-foot"><h4>🛏️ Matelas 2 places</h4><p>Désinfection vapeur · Anti-acariens</p></div>
+    </div>
+    <div class="ba rv-s d3">
+      <div class="ba-imgs"><span class="ba-lbl ba-bef">Avant</span><img class="ba-img" src="https://i.ibb.co/CpwrK6zM/avant-net-aymard.jpg" alt="Chaise avant"/><img class="ba-img" src="https://i.ibb.co/svg4vw0f/apr-s-net-aymard.jpg" alt="Chaise après"/><span class="ba-lbl ba-aft">Après</span></div>
+      <div class="ba-foot"><h4>🪑 Chaise bureau</h4><p>Savon noir + vapeur SC4</p></div>
+    </div>
+    <div class="ba rv-s d4">
+      <div class="ba-imgs"><span class="ba-lbl ba-bef">Avant</span><img class="ba-img" src="https://i.ibb.co/C5Drw6HK/Whats-App-Image-2026-04-05-at-11-20-02.jpg" alt="Tapis avant"/><img class="ba-img" src="https://i.ibb.co/Wvq9Sfk0/Whats-App-Image-2026-04-05-at-11-20-34.jpg" alt="Tapis après"/><span class="ba-lbl ba-aft">Après</span></div>
+      <div class="ba-foot"><h4>🪞 Tapis / Moquette</h4><p>Extraction profonde · Couleurs ravivées</p></div>
+    </div>
+    <div class="ba rv-s d5">
+      <div class="ba-imgs"><span class="ba-lbl ba-bef">Avant</span><img class="ba-img" src="https://i.ibb.co/pBQNWx9W/avt-pelluche.jpg" alt="Peluche avant"/><img class="ba-img" src="https://i.ibb.co/nMZth80S/Apr-s-Peluche.jpg" alt="Peluche après"/><span class="ba-lbl ba-aft">Après</span></div>
+      <div class="ba-foot"><h4>🧸 Peluches & textiles</h4><p>Produits naturels · Nettoyage délicat</p></div>
+    </div>
+    <div class="ba rv-s d6">
+      <div class="ba-imgs"><span class="ba-lbl ba-bef">Avant</span><img class="ba-img" src="https://i.ibb.co/Pv4q0zZM/Whats-App-Image-2026-04-05-at-11-24-01.jpg" alt="Matelas 2 avant"/><img class="ba-img" src="https://i.ibb.co/FkZ2jktJ/Whats-App-Image-2026-04-05-at-11-24-34.jpg" alt="Matelas 2 après"/><span class="ba-lbl ba-aft">Après</span></div>
+      <div class="ba-foot"><h4>🛏️ Matelas (client 2)</h4><p>Résultat visible en 1 prestation</p></div>
+    </div>
+  </div>
+  <div class="eau-proof rv d1">
+    <img src="https://i.ibb.co/Gv0XphQB/Eau-sale.jpg" alt="Eau sale preuve efficacité"/>
+    <div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#ff8080;margin-bottom:6px;">⚠️ Preuve d'efficacité</div>
+      <h4 style="font-size:14px;font-weight:800;margin-bottom:6px;">Voici ce qu'on extrait de vos meubles</h4>
+      <p style="font-size:12px;color:var(--texte);line-height:1.6;">Cette eau noire provient d'un canapé apparemment propre. Invisible à l'œil nu, mais bien présent. Notre Kärcher SC4 l'extrait en profondeur dès la première prestation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section class="sec bg2" id="tarifs">
+  <div class="cx">
+    <div class="stag rv">Transparence totale</div>
+    <h2 class="stitle rv d1">Grille tarifaire</h2>
+    <div class="gl rv d2"></div>
+    <p class="ssub rv d3">Prix fixes en FCFA. Devis définitif gratuit sur WhatsApp.</p>
+  </div>
+  <div style="margin-top:36px;">
+    <div class="t-tabs">
+      <button class="t-tab active" onclick="switchTab('n',this)">🧼 Nettoyage</button>
+      <button class="t-tab" onclick="switchTab('f',this)">❄️ Climatisation</button>
+      <button class="t-tab" onclick="switchTab('h',this)">🛡️ Hygiène 3D</button>
+    </div>
+    <div class="t-panel active" id="tab-n">
+      <div class="t-grid">
+        <div class="t-cat rv-s d1"><div class="t-head"><span>🛋️</span><h4>Canapés & Salons</h4></div><div class="t-row"><span>Canapé 3 places</span><span>20 000 FCFA</span></div><div class="t-row"><span>Canapé en L</span><span>25 000 FCFA</span></div><div class="t-row"><span>Salon complet (3P+2P+1P)</span><span>30 000 FCFA</span></div><div class="t-row"><span>Salon complet cuir</span><span>35 000 FCFA</span></div></div>
+        <div class="t-cat rv-s d2"><div class="t-head"><span>🛏️</span><h4>Matelas</h4></div><div class="t-row"><span>Matelas 1 place</span><span>10 000 FCFA</span></div><div class="t-row"><span>Matelas 2 places</span><span>15 000 FCFA</span></div><div class="t-row"><span>Matelas 3 places</span><span>20 000 FCFA</span></div></div>
+        <div class="t-cat rv-s d3"><div class="t-head"><span>🪑</span><h4>Fauteuils & Chaises</h4></div><div class="t-row"><span>Fauteuil</span><span>7 500 FCFA</span></div><div class="t-row"><span>Chaise</span><span>3 000 FCFA</span></div></div>
+        <div class="t-cat rv-s d4"><div class="t-head"><span>🪟</span><h4>Tapis & Rideaux</h4></div><div class="t-row"><span>Tapis</span><span>dès 10 000 FCFA</span></div><div class="t-row"><span>Rideaux</span><span>5 000 FCFA/pièce</span></div><div class="t-row"><span>Voilage</span><span>3 000 FCFA/pièce</span></div></div>
+        <div class="t-cat rv-s d5"><div class="t-head"><span>🏠</span><h4>Maison & Chantier</h4></div><div class="t-row"><span>Maison complète</span><span>dès 50 000 FCFA</span></div><div class="t-row"><span>Fin de chantier</span><span>Sur devis</span></div><div class="t-row"><span>Bureau / Commerce</span><span>Sur devis</span></div></div>
+      </div>
+      <div class="t-promo rv d1"><span style="font-size:20px;flex-shrink:0;">🎁</span><p><strong>Offre spéciale :</strong> –10% sur votre matelas en réservant un salon complet !</p></div>
+    </div>
+    <div class="t-panel" id="tab-f"><div class="t-grid"><div class="t-cat"><div class="t-head"><span>❄️</span><h4>Climatisation Split</h4></div><div class="t-row"><span>Installation split</span><span>20 000 FCFA</span></div><div class="t-row"><span>Entretien split</span><span>10 000 FCFA</span></div><div class="t-row"><span>Dépannage split</span><span>Sur devis</span></div></div></div><div class="t-promo"><span style="font-size:20px;flex-shrink:0;">ℹ️</span><p>Contrats B2B avec <strong>tarifs préférentiels</strong>. Devis sur-mesure disponible.</p></div></div>
+    <div class="t-panel" id="tab-h"><div class="t-promo" style="margin-top:0;"><span style="font-size:20px;flex-shrink:0;">🛡️</span><p>Tarifs <strong>sur devis</strong> selon superficie et niveau de traitement. Évaluation gratuite.</p></div></div>
+  </div>
+</section>
+
+<!-- CALCULATEUR -->
+<section class="sec" id="calculateur">
+  <div class="cx">
+    <div class="stag rv">Estimez votre budget</div>
+    <h2 class="stitle rv d1">Calculateur de prix</h2>
+    <div class="gl rv d2"></div>
+    <p class="ssub rv d3">Estimation instantanée. Confirmation gratuite sur WhatsApp.</p>
+    <div class="dbadges rv d4"><span class="db db1">⚡ B2C : Réponse dans l'heure</span><span class="db db2">🏢 B2B : Devis sous 2h</span></div>
+  </div>
+  <div class="calc rv d1">
+    <div class="cg2">
+      <div class="cf"><label>Service</label><select id="cs" onchange="calc()"><option value="0">Choisir…</option><option value="20000">Canapé 3 places</option><option value="25000">Canapé en L</option><option value="30000">Salon complet</option><option value="35000">Salon complet cuir</option><option value="10000">Matelas 1 place</option><option value="15000">Matelas 2 places</option><option value="20000">Matelas 3 places</option><option value="7500">Fauteuil</option><option value="3000">Chaise</option><option value="10000">Tapis</option><option value="5000">Rideau/pièce</option><option value="3000">Voilage/pièce</option><option value="50000">Maison complète</option><option value="20000">Installation clim</option><option value="10000">Entretien clim</option></select></div>
+      <div class="cf"><label>Quantité</label><input type="number" id="cq" value="1" min="1" max="20" oninput="calc()"/></div>
+      <div class="cf"><label>Promo salon + matelas ?</label><select id="cp" onchange="calc()"><option value="0">Non</option><option value="1">Oui (–10% matelas)</option></select></div>
+      <div class="cf"><label>Matelas (pour promo)</label><select id="cm2" onchange="calc()"><option value="0">Aucun</option><option value="10000">Matelas 1 place</option><option value="15000">Matelas 2 places</option><option value="20000">Matelas 3 places</option></select></div>
+    </div>
+    <div class="c-res"><div><p style="font-size:13px;color:var(--texte);">Estimation totale</p><p style="font-size:10px;color:var(--texte);margin-top:2px;">Hors déplacement · À confirmer</p></div><div class="c-price" id="cp2">—</div></div>
+    <button class="c-btn" onclick="demanderDevis()">Obtenir mon devis gratuit →</button>
+  </div>
+</section>
+
+<!-- RDV -->
+<section class="sec bg2" id="rdv">
+  <div class="stag rv">Réservation en ligne</div>
+  <h2 class="stitle rv d1">Prenez rendez-vous<br/>en quelques clics.</h2>
+  <div class="gl rv d2"></div>
+  <div class="g2" style="margin-top:36px;">
+    <div class="fbox rv-l">
+      <h3>📅 Nouveau rendez-vous</h3>
+      <div class="fr2"><div class="fg"><label>Prénom *</label><input type="text" id="rp" placeholder="Jean"/></div><div class="fg"><label>Nom</label><input type="text" id="rn" placeholder="Moukala"/></div></div>
+      <div class="fg"><label>Téléphone / WhatsApp *</label><input type="tel" id="rt" placeholder="+242 06 XXX XX XX"/></div>
+      <div class="fg"><label>Email (pour Calendar)</label><input type="email" id="re" placeholder="votre@email.com"/></div>
+      <div class="fg"><label>Service *</label><select id="rs"><option value="">Choisir…</option><option>Nettoyage canapé</option><option>Nettoyage matelas</option><option>Nettoyage salon complet</option><option>Nettoyage tapis / rideaux</option><option>Nettoyage maison complet</option><option>Fin de chantier</option><option>Installation climatisation</option><option>Entretien climatisation</option><option>Dépannage climatisation</option><option>Hygiène 3D</option><option>Contrat entreprise (B2B)</option></select></div>
+      <div class="fr2"><div class="fg"><label>Date *</label><input type="date" id="rd"/></div><div class="fg"><label>Créneau</label><select id="rh"><option>7h–9h</option><option>9h–11h</option><option>11h–13h</option><option>14h–16h</option><option>16h–18h</option></select></div></div>
+      <div class="fg"><label>Adresse</label><input type="text" id="ra" placeholder="Quartier, rue, repère…"/></div>
+      <div class="fg"><label>Notes</label><textarea id="rno" placeholder="Précisions utiles…"></textarea></div>
+      <button class="fs" onclick="envoyerRDV()">✅ Confirmer mon rendez-vous →</button>
+    </div>
+    <div class="rdv-info rv-r">
+      <div class="ri"><h4>⚡ B2C : Réponse dans l'heure</h4><p>Particulier ? Confirmation garantie <strong>dans l'heure</strong> sur WhatsApp ou par appel.</p></div>
+      <div class="ri"><h4>🏢 B2B : Devis sous 2h</h4><p>Entreprise ? Devis personnalisé avec proposition de contrat sous 2 heures.</p></div>
+      <div class="ri"><h4>📍 Zones</h4><p>Ngoyo · Centre-ville · Tié-Tié · La Base · Tchimbamba · Mpita · OCH · Fouks</p></div>
+      <div class="ri"><h4>🕐 Horaires</h4><p>Lun–Sam : 7h–19h · Dim : Sur RDV</p></div>
+      <div class="rcal"><p>📅 <strong>Google Calendar :</strong> Renseignez votre email pour recevoir une invitation automatique.</p></div>
+      <div class="rdv-list-box"><h4>📋 Rendez-vous enregistrés</h4><div class="rdv-list" id="rdvList"><p class="rdv-empty">Aucun rendez-vous pour le moment.</p></div></div>
+      <a href="https://wa.me/242040612350" class="btn-wa"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Réserver via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- POURQUOI -->
+<section class="sec" id="pourquoi">
+  <div class="g2">
+    <div>
+      <div class="stag rv">Notre différence</div>
+      <h2 class="stitle rv d1">Pourquoi nous choisir ?</h2>
+      <div class="gl rv d2"></div>
+      <div class="why-feats">
+        <div class="wf rv-l d1"><div class="wfi">⚡</div><div class="wfb"><h4>Réactivité B2C dans l'heure</h4><p>Particulier ? Réponse dans l'heure. Entreprise ? Devis sous 2h.</p></div></div>
+        <div class="wf rv-l d2"><div class="wfi">🔧</div><div class="wfb"><h4>Matériel Kärcher Pro</h4><p>SC4, WD5, K4, APC, microfibres — investissement dans les meilleurs équipements.</p></div></div>
+        <div class="wf rv-l d3"><div class="wfi">👷</div><div class="wfb"><h4>Techniciens identifiables</h4><p>Gilet vert, casquette noire, gants noirs, surchaussures — équipes pro et reconnaissables.</p></div></div>
+        <div class="wf rv-l d4"><div class="wfi">📋</div><div class="wfb"><h4>Entreprise enregistrée</h4><p>RCCM officiel depuis 2021. Facturation disponible pour entreprises.</p></div></div>
+      </div>
+    </div>
+    <div class="why-vis rv-r d1">
+      <img src="https://i.ibb.co/7FVyvzJ/Whats-App-Image-2026-04-05-at-01-40-21.jpg" alt="Dony TCHICAYA Manager Général Devousamoijobbing" style="width:100%;display:block;object-fit:cover;max-height:340px;"/>
+      <div class="why-foot">
+        <p class="why-q">"Notre mission : vous offrir la <strong>propreté et le confort</strong> que vous méritez, avec la précision d'un professionnel et le soin d'un partenaire de confiance."</p>
+        <div class="why-sig"><div class="why-av">D</div><div><p style="font-size:12px;font-weight:800;">Dony TCHICAYA</p><span style="font-size:10px;color:var(--or);letter-spacing:1px;text-transform:uppercase;">Manager Général & Fondateur</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec bg2 cx" id="process">
+  <div class="stag rv">Comment ça marche</div>
+  <h2 class="stitle rv d1">4 étapes vers l'impeccable.</h2>
+  <div class="gl rv d2"></div>
+  <div class="proc-grid">
+    <div class="proc rv d1"><div class="proc-n">01</div><div class="proc-i">💬</div><h4>Contact & Devis</h4><p>WhatsApp ou formulaire. B2C dans l'heure · B2B sous 2h.</p></div>
+    <div class="proc rv d2"><div class="proc-n">02</div><div class="proc-i">📅</div><h4>Planification</h4><p>Créneau adapté à votre agenda.</p></div>
+    <div class="proc rv d3"><div class="proc-n">03</div><div class="proc-i">🔧</div><h4>Intervention Pro</h4><p>Techniciens en uniforme, Kärcher, gants noirs.</p></div>
+    <div class="proc rv d4"><div class="proc-n">04</div><div class="proc-i">✅</div><h4>Résultat garanti</h4><p>Vous validez avant que nous partions.</p></div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section class="sec" id="avis">
+  <div class="cx">
+    <div class="stag rv">Témoignages</div>
+    <h2 class="stitle rv d1">Ils nous font confiance.</h2>
+    <div class="gl rv d2"></div>
+  </div>
+  <div class="avis-grid" id="avis-container">
+    <div class="av-card rv d1">
+      <img class="av-photo" src="https://i.ibb.co/ycgkVg1m/Apr-s-Canap.jpg" alt="Canapé après nettoyage"/>
+      <div class="av-body"><div class="av-stars">★★★★★</div><p class="av-text">"Mon canapé semblait neuf après leur passage. Résultat impeccable, équipe ponctuelle. Je recommande à 100% !"</p><div class="av-name">Mme A. Mbemba</div><div class="av-role">Cliente particulière · Ngoyo</div><div class="av-svc">🧼 Nettoyage canapé salon</div></div>
+    </div>
+    <div class="av-card rv d2">
+      <img class="av-photo" src="https://i.ibb.co/qMfPkC0D/Nettoyeur-vap-dev.jpg" alt="Nettoyage professionnel bureau"/>
+      <div class="av-body"><div class="av-stars">★★★★★</div><p class="av-text">"Contrat d'entretien pour nos bureaux. Travail sérieux, devis clair, résultat à chaque fois. Un vrai partenaire de confiance."</p><div class="av-name">M. Sylvain K.</div><div class="av-role">Gérant PME · Pointe-Noire</div><div class="av-svc">🏢 Contrat entretien bureaux</div></div>
+    </div>
+    <div class="av-card rv d3">
+      <img class="av-photo" src="https://i.ibb.co/JwH5yq5F/Apr-s-Mat.jpg" alt="Matelas après nettoyage"/>
+      <div class="av-body"><div class="av-stars">★★★★★</div><p class="av-text">"Mon matelas était vraiment sale. Après leur passage, il était comme neuf. Merci Devousamoijobbing !"</p><div class="av-name">Mme Patricia L.</div><div class="av-role">Cliente particulière · Tchimbamba</div><div class="av-svc">🛏️ Nettoyage matelas 2 places</div></div>
+    </div>
+    <div class="av-card rv d4">
+      <div class="av-icon" style="background:linear-gradient(135deg,rgba(26,107,60,.2),var(--bg3));">❄️</div>
+      <div class="av-body"><div class="av-stars">★★★★★</div><p class="av-text">"Installation clim en moins de 2h. Équipe ponctuelle, en tenue pro, matériel nickel. Je les recommande sans hésiter."</p><div class="av-name">M. Patrick N.</div><div class="av-role">Client · La Base</div><div class="av-svc">❄️ Installation climatisation split</div></div>
+    </div>
+  </div>
+  <div class="avis-form rv d1">
+    <h3>⭐ Laisser votre avis</h3>
+    <div class="si" id="si"><span onclick="setStar(1)">★</span><span onclick="setStar(2)">★</span><span onclick="setStar(3)">★</span><span onclick="setStar(4)">★</span><span onclick="setStar(5)">★</span></div>
+    <div class="fg"><label>Votre prénom</label><input type="text" id="an" placeholder="Marie-Claire"/></div>
+    <div class="fg"><label>Votre témoignage</label><textarea id="at" placeholder="Décrivez votre expérience…"></textarea></div>
+    <div class="fg"><label>Service utilisé</label><input type="text" id="as" placeholder="ex : Nettoyage canapé · Ngoyo"/></div>
+    <button class="fs" onclick="pubAvis()">Publier mon avis →</button>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec bg2" id="faq">
+  <div class="cx"><div class="stag rv">Questions fréquentes</div><h2 class="stitle rv d1">Tout ce que vous devez savoir.</h2><div class="gl rv d2"></div></div>
+  <div class="faq-list">
+    <div class="fq rv d1"><div class="fq-q" onclick="tFaq(this)">Comment obtenir un devis ?<span class="fq-arr">+</span></div><div class="fq-a"><p>WhatsApp au +242 04 061 23 50 ou formulaire en ligne. B2C : réponse dans l'heure. B2B : devis sous 2h.</p></div></div>
+    <div class="fq rv d2"><div class="fq-q" onclick="tFaq(this)">Dans quelles zones intervenez-vous ?<span class="fq-arr">+</span></div><div class="fq-a"><p>Tout Pointe-Noire : Ngoyo, Centre-ville, Tié-Tié, La Base, Tchimbamba, Mpita, OCH, Fouks et environs.</p></div></div>
+    <div class="fq rv d3"><div class="fq-q" onclick="tFaq(this)">Quel matériel utilisez-vous ?<span class="fq-arr">+</span></div><div class="fq-a"><p>Kärcher SC4 (vapeur), WD5 (extraction), K4 (haute pression), savon de Marseille 5L, savon noir, bicarbonate, APC, microfibres haute densité et polish.</p></div></div>
+    <div class="fq rv d4"><div class="fq-q" onclick="tFaq(this)">Combien de temps dure une prestation ?<span class="fq-arr">+</span></div><div class="fq-a"><p>De 30 min (canapé 2 places) à une demi-journée (chantier complet). Estimation communiquée lors du devis.</p></div></div>
+    <div class="fq rv d1"><div class="fq-q" onclick="tFaq(this)">Proposez-vous des contrats entreprises ?<span class="fq-arr">+</span></div><div class="fq-a"><p>Oui ! Contrats B2B sur-mesure pour hôtels, bureaux, cliniques, commerces. Tarifs préférentiels selon la fréquence.</p></div></div>
+    <div class="fq rv d2"><div class="fq-q" onclick="tFaq(this)">Comment se passe le paiement ?<span class="fq-arr">+</span></div><div class="fq-a"><p>Paiement après votre validation. Espèces et Mobile Money (Airtel Money, MTN Money) acceptés.</p></div></div>
+    <div class="fq rv d3"><div class="fq-q" onclick="tFaq(this)">La maison complète, c'est quoi ?<span class="fq-arr">+</span></div><div class="fq-a"><p>Nettoyage de toutes les pièces (sols, surfaces, meubles, sanitaires). Dès 50 000 FCFA selon superficie. Devis gratuit.</p></div></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="sec" id="blog">
+  <div class="stag rv">Conseils & Actualités</div>
+  <h2 class="stitle rv d1">Notre blog</h2>
+  <div class="gl rv d2"></div>
+  <p class="ssub rv d3">Astuces, conseils d'entretien et actualités Devousamoijobbing.</p>
+  <div class="blog-grid">
+    <div class="blog rv d1"><img src="https://i.ibb.co/ycgkVg1m/Apr-s-Canap.jpg" alt="Nettoyage canapé résultat"/><div class="blog-body"><div class="blog-tag">Nettoyage · Conseil</div><h4>5 signes que votre canapé a besoin d'un nettoyage professionnel</h4><p>Odeurs, taches, allergies… Les signaux qui ne trompent pas.</p><a href="#" class="blog-read" onclick="openMo('b0');return false;">Lire l'article →</a></div></div>
+    <div class="blog rv d2"><img src="https://i.ibb.co/Gv0XphQB/Eau-sale.jpg" alt="Eau sale preuve efficacité"/><div class="blog-body"><div class="blog-tag">Hygiène · Preuve</div><h4>Ce que votre canapé cache vraiment — la preuve par l'eau sale</h4><p>Voici l'eau extraite d'un canapé "propre". Choquant mais réel.</p><a href="#" class="blog-read" onclick="openMo('b1');return false;">Lire l'article →</a></div></div>
+    <div class="blog rv d3"><img src="https://i.ibb.co/JwH5yq5F/Apr-s-Mat.jpg" alt="Matelas après nettoyage"/><div class="blog-body"><div class="blog-tag">Hygiène · Santé</div><h4>Acariens et matelas : ce que vous devez absolument savoir</h4><p>Votre matelas peut abriter des millions d'acariens. Nos solutions.</p><a href="#" class="blog-read" onclick="openMo('b2');return false;">Lire l'article →</a></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec bg2" id="contact">
+  <div class="stag rv">Nous contacter</div>
+  <h2 class="stitle rv d1">Parlons de votre projet.</h2>
+  <div class="gl rv d2"></div>
+  <div class="g2" style="margin-top:36px;">
+    <div class="rv-l">
+      <div class="ci">
+        <div class="ci-it"><div class="ci-ic">📞</div><div><h5>Téléphone</h5><a href="tel:+242069136364">+242 06 913 63 64</a></div></div>
+        <div class="ci-it"><div class="ci-ic">💬</div><div><h5>WhatsApp</h5><a href="https://wa.me/242040612350">+242 04 061 23 50</a></div></div>
+        <div class="ci-it"><div class="ci-ic">✉️</div><div><h5>Email</h5><a href="mailto:devousamoijobbing@gmail.com">devousamoijobbing@gmail.com</a><br/><a href="mailto:devousamoijobbing@outlook.fr">devousamoijobbing@outlook.fr</a></div></div>
+        <div class="ci-it"><div class="ci-ic">📍</div><div><h5>Adresse</h5><p>Arrêt Orphelinat, Ngoyo<br/>Pointe-Noire, République du Congo</p></div></div>
+        <div class="ci-it"><div class="ci-ic">🕐</div><div><h5>Horaires</h5><p>Lun–Sam : 7h–19h · Dim : Sur RDV</p></div></div>
+      </div>
+      <div class="soc-row">
+        <a href="https://facebook.com/devousamoijobbing" target="_blank" class="soc-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> Facebook</a>
+        <a href="https://instagram.com/devousamoijobbing" target="_blank" class="soc-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> Instagram</a>
+        <a href="https://linkedin.com/company/devousamoijobbing" target="_blank" class="soc-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
+      </div>
+    </div>
+    <div class="fbox rv-r">
+      <h3>✉️ Envoyer un message</h3>
+      <div class="fr2"><div class="fg"><label>Prénom</label><input type="text" id="cp3" placeholder="Jean"/></div><div class="fg"><label>Nom</label><input type="text" id="cn2" placeholder="Moukala"/></div></div>
+      <div class="fg"><label>Téléphone</label><input type="tel" id="ct2" placeholder="+242 06 XXX XX XX"/></div>
+      <div class="fg"><label>Service</label><select id="cs2"><option>Nettoyage</option><option>Climatisation</option><option>Hygiène 3D</option><option>Contrat entreprise</option><option>Autre</option></select></div>
+      <div class="fg"><label>Message</label><textarea id="cm3" placeholder="Décrivez votre besoin…"></textarea></div>
+      <button class="fs" onclick="envContact()">Envoyer →</button>
+    </div>
+  </div>
+</section>
+
+<!-- REJOINDRE -->
+<section class="sec" id="rejoindre">
+  <div class="g2">
+    <div>
+      <div class="stag rv">Carrières</div>
+      <h2 class="stitle rv d1">Rejoignez l'équipe.</h2>
+      <div class="gl rv d2"></div>
+      <p class="ssub rv d3">Rigoureux, motivé, fier du travail bien fait ? Nous cherchons des talents locaux.</p>
+      <div class="jp-list">
+        <div class="jp rv-l d1"><div class="jp-i">💰</div><div class="jp-b"><h4>Rémunération attractive</h4><p>Commissions et primes liées à la performance.</p></div></div>
+        <div class="jp rv-l d2"><div class="jp-i">🔧</div><div class="jp-b"><h4>Matériel Kärcher fourni</h4><p>Vous travaillez avec les meilleurs équipements du marché.</p></div></div>
+        <div class="jp rv-l d3"><div class="jp-i">📚</div><div class="jp-b"><h4>Formation assurée</h4><p>Formé aux techniques pro dès votre arrivée.</p></div></div>
+        <div class="jp rv-l d4"><div class="jp-i">📈</div><div class="jp-b"><h4>Évolution possible</h4><p>Entreprise en croissance = vraies opportunités.</p></div></div>
+      </div>
+    </div>
+    <div class="fbox rv-r">
+      <div class="cb">⏸ Recrutement en pause</div>
+      <h3>Candidature spontanée</h3>
+      <p style="font-size:13px;color:var(--texte);line-height:1.6;margin-bottom:16px;">Pas de postes ouverts actuellement. Vos candidatures spontanées sont les bienvenues.</p>
+      <div class="fg"><label>Prénom & Nom *</label><input type="text" id="cvn" placeholder="Marie-Claire Moukala"/></div>
+      <div class="fg"><label>Téléphone *</label><input type="tel" id="cvt" placeholder="+242 06 XXX XX XX"/></div>
+      <div class="fg"><label>Email</label><input type="email" id="cve" placeholder="votre@email.com"/></div>
+      <div class="fg"><label>Domaine</label><select id="cvd"><option>Nettoyage professionnel</option><option>Climatisation / Froid</option><option>Commercial / Vente</option><option>Administration</option><option>Autre</option></select></div>
+      <div class="fg"><label>Motivation</label><textarea id="cvm" placeholder="Présentez-vous brièvement…"></textarea></div>
+      <div class="fg"><label>Déposer votre CV (PDF, Word)</label><div class="file-wrap"><div class="file-lbl"><span>📎</span><span>Choisir un fichier…</span></div><input class="file-inp" type="file" id="cvf" accept=".pdf,.doc,.docx" onchange="showFile(this)"/></div><div class="file-nm" id="fn"></div></div>
+      <button class="fs" onclick="envCV()">Envoyer ma candidature →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="bottom">
+  <h2 class="rv">Prêt pour une prestation<br/><em style="color:var(--or);font-style:normal;">d'exception ?</em></h2>
+  <p class="rv d1">Particuliers : réponse dans l'heure. Entreprises : devis sous 2h. Matériel Kärcher Pro.</p>
+  <div class="cta-btns rv d2">
+    <a href="https://wa.me/242040612350" class="btn-wa"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp +242 04 061 23 50</a>
+    <a href="#rdv" class="btn-gh">📅 Réserver en ligne</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <div class="fb">
+      <a href="#top"><img src="https://i.ibb.co/Y75FSNY3/logo-optimis-dev.jpg" alt="Devousamoijobbing" style="height:34px;width:auto;object-fit:contain;border-radius:5px;"/></a>
+      <p>Services premium de nettoyage, climatisation et hygiène 3D à Pointe-Noire. Matériel Kärcher Pro. RCCM depuis 2021.</p>
+      <div class="fs2">
+        <a href="https://facebook.com/devousamoijobbing" target="_blank"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://instagram.com/devousamoijobbing" target="_blank"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://linkedin.com/company/devousamoijobbing" target="_blank"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="mailto:devousamoijobbing@outlook.fr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
+    </div>
+    <div class="fc"><h5>Services</h5><ul><li><a href="#services">Nettoyage Pro</a></li><li><a href="#services">Climatisation</a></li><li><a href="#services">Hygiène 3D</a></li><li><a href="#tarifs">Tarifs</a></li><li><a href="#calculateur">Calculateur</a></li></ul></div>
+    <div class="fc"><h5>Navigation</h5><ul><li><a href="#rdv">Réserver</a></li><li><a href="#avis">Avis clients</a></li><li><a href="#materiel">Matériel</a></li><li><a href="#avantapres">Avant/Après</a></li><li><a href="#blog">Blog</a></li></ul></div>
+    <div class="fc"><h5>Légal</h5><ul><li><span onclick="openMo('men')">Mentions légales</span></li><li><span onclick="openMo('cgu')">Conditions d'utilisation</span></li><li><span onclick="openMo('conf')">Confidentialité</span></li></ul></div>
+  </div>
+  <div class="fb-bot">
+    <p>© 2026 ETS Devousamoijobbing · Tous droits réservés · Pointe-Noire, Congo</p>
+    <p>RCCM N° CG/PNR/01-2021-A10-01655</p>
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="mo" id="mo-men"><div class="mo-box"><button class="mo-cl" onclick="closeMo('men')">✕</button><h2>Mentions Légales</h2><h3>Éditeur</h3><p><strong>ETS Devousamoijobbing</strong> · Arrêt Orphelinat, Ngoyo, Pointe-Noire · RCCM N° CG/PNR/01-2021-A10-01655</p><h3>Directeur de publication</h3><p>Dony TCHICAYA, Manager Général & Fondateur</p><h3>Contact</h3><p>+242 06 913 63 64 | +242 04 061 23 50 | devousamoijobbing@gmail.com</p><h3>Propriété intellectuelle</h3><p>Tout le contenu (textes, visuels, logos) est la propriété d'ETS Devousamoijobbing.</p></div></div>
+<div class="mo" id="mo-cgu"><div class="mo-box"><button class="mo-cl" onclick="closeMo('cgu')">✕</button><h2>Conditions Générales d'Utilisation</h2><h3>1. Objet</h3><p>Les présentes CGU régissent l'utilisation du site vitrine d'ETS Devousamoijobbing.</p><h3>2. Réservations</h3><p>Les demandes soumises sont des demandes de contact, pas des contrats fermes avant confirmation de notre équipe.</p><h3>3. Tarifs</h3><p>Les tarifs affichés sont indicatifs en FCFA. Devis définitif gratuit sur WhatsApp.</p><h3>4. Droit applicable</h3><p>Droit de la République du Congo. Litiges soumis aux juridictions de Pointe-Noire.</p></div></div>
+<div class="mo" id="mo-conf"><div class="mo-box"><button class="mo-cl" onclick="closeMo('conf')">✕</button><h2>Politique de Confidentialité</h2><h3>Données collectées</h3><p>Prénom, nom, téléphone, email (optionnel), adresse et informations sur votre demande.</p><h3>Finalités</h3><ul><li>Répondre à vos demandes</li><li>Confirmer et suivre vos prestations</li></ul><h3>Conservation</h3><p>3 ans maximum.</p><h3>Partage</h3><p>Vos données ne sont jamais vendues ni cédées à des tiers.</p><h3>Droits</h3><p>devousamoijobbing@gmail.com</p></div></div>
+<div class="mo" id="mo-b0"><div class="mo-box"><button class="mo-cl" onclick="closeMo('b0')">✕</button><h2>5 signes que votre canapé a besoin d'un nettoyage professionnel</h2><h3>1. Odeurs persistantes</h3><p>Les fibres absorbent bactéries et moisissures. Le Kärcher SC4 vapeur les détruit en profondeur.</p><h3>2. Taches incrustées</h3><p>Café, jus, graisse… Nécessitent produits APC et extraction haute pression.</p><h3>3. Allergies</h3><p>Acariens et allergènes dans les rembourrages. Notre vapeur en élimine jusqu'à 99%.</p><h3>4. Couleur terne</h3><p>Notre extraction vapeur + microfibres ravive les couleurs d'origine.</p><h3>5. Plus de 6 mois sans nettoyage</h3><p>Recommandé tous les 6 mois avec enfants ou animaux.</p><p style="margin-top:14px;"><a href="https://wa.me/242040612350" style="color:var(--or);font-weight:700;">→ Réserver sur WhatsApp</a></p></div></div>
+<div class="mo" id="mo-b1"><div class="mo-box"><button class="mo-cl" onclick="closeMo('b1')">✕</button><h2>Ce que votre canapé cache vraiment</h2><h3>La réalité choquante</h3><p>Cette eau noire que vous voyez dans notre photo a été extraite d'un canapé qui semblait propre. Poussières, bactéries, acariens, résidus organiques — tout ça était là, invisible à l'œil nu.</p><h3>Notre solution Kärcher WD5</h3><p>L'aspirateur eau et poussière WD5 combiné à la vapeur SC4 extrait tout ce que les yeux ne voient pas. Un résultat visible, une preuve tangible de notre efficacité.</p><p style="margin-top:14px;"><a href="https://wa.me/242040612350" style="color:var(--or);font-weight:700;">→ Réserver sur WhatsApp</a></p></div></div>
+<div class="mo" id="mo-b2"><div class="mo-box"><button class="mo-cl" onclick="closeMo('b2')">✕</button><h2>Acariens et matelas : ce que vous devez savoir</h2><h3>La réalité invisible</h3><p>Un matelas non entretenu peut abriter jusqu'à 2 millions d'acariens provoquant allergies et troubles respiratoires.</p><h3>Notre solution SC4</h3><p>Aspiration + vapeur 100°C + microfibres. Matelas sain, sans odeur, sans allergènes.</p><h3>Tarifs</h3><p>1 place : 10 000 | 2 places : 15 000 | 3 places : 20 000 FCFA · <strong>–10%</strong> avec salon complet.</p><p style="margin-top:14px;"><a href="https://wa.me/242040612350" style="color:var(--or);font-weight:700;">→ Réserver sur WhatsApp</a></p></div></div>
+
+<!-- SCROLL BTNS -->
+<div class="scr-btns">
+  <button class="scr-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Haut de page">▲</button>
+  <button class="scr-btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" title="Bas de page">▼</button>
+</div>
+
+<!-- CHATBOT LESLIE -->
+<button class="chat-btn" onclick="toggleChat()"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></button>
+<div class="cw" id="cw">
+  <div class="ch"><div class="ch-av">💁‍♀️</div><div><h4>Leslie</h4><p>Assistante Devousamoijobbing · En ligne</p></div><button class="ch-cl" onclick="toggleChat()">✕</button></div>
+  <div class="cm" id="cm"><div class="msg bot">Bonjour ! 😊 Je suis <strong>Leslie</strong>. Comment puis-je vous aider ?</div></div>
+  <div class="cq">
+    <button class="cqb" onclick="qr('tarifs')">💰 Tarifs</button>
+    <button class="cqb" onclick="qr('rdv')">📅 RDV</button>
+    <button class="cqb" onclick="qr('mat')">🔧 Matériel</button>
+    <button class="cqb" onclick="qr('zones')">📍 Zones</button>
+    <button class="cqb" onclick="qr('delai')">⚡ Délais</button>
+  </div>
+  <div class="cin-wrap"><input class="cin" id="cin" placeholder="Votre message…" onkeydown="if(event.key==='Enter')sendMsg()"/><button class="csend" onclick="sendMsg()">→</button></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══ THEME ══
+function applyTheme(d){
+  document.documentElement.setAttribute('data-theme',d?'dark':'light');
+  document.getElementById('tc').checked=d;
+  document.getElementById('tcm').checked=d;
+}
+window.addEventListener('DOMContentLoaded',()=>applyTheme(true));
+
+// ══ MENU ══
+function toggleMenu(){
+  document.getElementById('hb').classList.toggle('open');
+  document.getElementById('mm').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('mm').classList.contains('open')?'hidden':'';
+}
+function closeMenu(){
+  document.getElementById('hb').classList.remove('open');
+  document.getElementById('mm').classList.remove('open');
+  document.body.style.overflow='';
+}
+function goTo(s){document.querySelector(s).scrollIntoView({behavior:'smooth'});}
+
+// ══ SCROLL PROGRESS + NAV ══
+window.addEventListener('scroll',()=>{
+  const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  document.getElementById('sp').style.width=pct+'%';
+  document.getElementById('nav').classList.toggle('sc',window.scrollY>60);
+  // nav active
+  let cur='';
+  document.querySelectorAll('section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
+  document.querySelectorAll('.nl a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+});
+
+// ══ CURSOR GLOW ══
+if(window.innerWidth>768){
+  document.addEventListener('mousemove',e=>{
+    const g=document.getElementById('cg');
+    if(g){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';}
+  });
+}
+
+// ══ PARTICULES HERO ══
+(function(){
+  const hero=document.querySelector('.hero');
+  if(!hero)return;
+  for(let i=0;i<16;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;animation-delay:${Math.random()*8}s;animation-duration:${6+Math.random()*6}s;opacity:${Math.random()*0.4+0.1};`;
+    hero.appendChild(p);
+  }
+})();
+
+// ══ REVEAL AU SCROLL ══
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el=>obs.observe(el));
+
+// ══ COMPTEUR STATS ══
+function counter(el,target,sfx){
+  let s=0;const dur=1600;
+  const step=ts=>{
+    if(!s)s=ts;
+    const prog=Math.min((ts-s)/dur,1);
+    const e=1-Math.pow(1-prog,3);
+    el.textContent=Math.floor(e*target)+sfx;
+    if(prog<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const h=e.target.querySelector('h3[data-count]');
+      if(h)counter(h,parseInt(h.dataset.count),h.dataset.suffix||'');
+      cObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.stat').forEach(s=>cObs.observe(s));
+
+// ══ TILT 3D ══
+document.querySelectorAll('.mat,.av-card,.blog').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width-.5)*10;
+    const y=((e.clientY-r.top)/r.height-.5)*10;
+    c.style.transform=`translateY(-6px) rotateX(${-y}deg) rotateY(${x}deg)`;
+    c.style.transition='transform .08s ease';
+  });
+  c.addEventListener('mouseleave',()=>{
+    c.style.transform='';
+    c.style.transition='transform .4s ease,box-shadow .4s ease,border-color .4s ease';
+  });
+});
+
+// ══ TARIFS ══
+function switchTab(id,btn){
+  document.querySelectorAll('.t-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.t-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active');
+}
+
+// ══ FAQ ══
+function tFaq(el){
+  const item=el.parentElement,open=item.classList.contains('open');
+  document.querySelectorAll('.fq').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+
+// ══ CALC ══
+function calc(){
+  const s=parseInt(document.getElementById('cs').value)||0;
+  const q=parseInt(document.getElementById('cq').value)||1;
+  const p=parseInt(document.getElementById('cp').value)||0;
+  const m=parseInt(document.getElementById('cm2').value)||0;
+  let t=s*q;if(p&&m)t+=m*.9;
+  document.getElementById('cp2').textContent=t>0?t.toLocaleString('fr-FR')+' FCFA':'—';
+}
+function demanderDevis(){
+  window.open('https://wa.me/242040612350?text='+encodeURIComponent('Bonjour, estimation calculateur : '+document.getElementById('cp2').textContent+'. Je souhaite un devis.'),'_blank');
+}
+
+// ══ RDV ══
+let rdvs=[];
+function envoyerRDV(){
+  const p=document.getElementById('rp').value.trim();
+  const t=document.getElementById('rt').value.trim();
+  const s=document.getElementById('rs').value;
+  const d=document.getElementById('rd').value;
+  const em=document.getElementById('re').value.trim();
+  if(!p||!t||!s||!d){showToast('⚠️ Remplissez les champs obligatoires (*).');return;}
+  rdvs.push({p,n:document.getElementById('rn').value,t,s,d,h:document.getElementById('rh').value,a:document.getElementById('ra').value});
+  renderRDV();
+  const msg=`📅 RDV – Devousamoijobbing\nNom: ${p} ${document.getElementById('rn').value}\nTél: ${t}\nEmail: ${em||'—'}\nService: ${s}\nDate: ${d} · ${document.getElementById('rh').value}\nAdresse: ${document.getElementById('ra').value||'—'}\nNote: ${document.getElementById('rno').value||'—'}`;
+  window.open('https://wa.me/242040612350?text='+encodeURIComponent(msg),'_blank');
+  if(em&&d){
+    const st=d.replace(/-/g,'')+'T070000',en=d.replace(/-/g,'')+'T090000';
+    setTimeout(()=>window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Devousamoijobbing+%E2%80%93+${encodeURIComponent(s)}&dates=${st}/${en}&details=RDV+confirm%C3%A9.+T%C3%A9l:+%2B242+04+061+23+50&location=Pointe-Noire,+Congo`,'_blank'),1200);
+  }
+  showToast('✅ RDV enregistré ! WhatsApp ouvert'+(em?' + Calendar':'')+'.');
+  ['rp','rn','rt','re','rd','ra','rno'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('rs').value='';
+}
+function renderRDV(){
+  const el=document.getElementById('rdvList');
+  el.innerHTML=rdvs.length?rdvs.map(r=>`<div class="rdv-item"><strong>${r.p} ${r.n}</strong> · ${r.s}<br/>📅 ${r.d} · ${r.h}${r.a?'<br/>📍 '+r.a:''}</div>`).join(''):'<p class="rdv-empty">Aucun rendez-vous pour le moment.</p>';
+}
+
+// ══ CONTACT ══
+function envContact(){
+  const p=document.getElementById('cp3').value.trim();
+  const t=document.getElementById('ct2').value.trim();
+  const m=document.getElementById('cm3').value.trim();
+  if(!p||!t||!m){showToast('⚠️ Veuillez remplir tous les champs.');return;}
+  window.open('https://wa.me/242040612350?text='+encodeURIComponent(`Bonjour, je suis ${p} ${document.getElementById('cn2').value}. Tél: ${t}. Service: ${document.getElementById('cs2').value}. Message: ${m}`),'_blank');
+  showToast('✅ Merci ! Réponse dans l\'heure (B2C) ou sous 2h (B2B).');
+}
+
+// ══ CV ══
+function showFile(i){
+  const f=i.files[0];if(!f)return;
+  document.getElementById('fn').textContent='📄 '+f.name+' ('+Math.round(f.size/1024)+' Ko)';
+  document.querySelector('.file-lbl span:last-child').textContent=f.name;
+}
+function envCV(){
+  const n=document.getElementById('cvn').value.trim();
+  const t=document.getElementById('cvt').value.trim();
+  if(!n||!t){showToast('⚠️ Champs obligatoires manquants.');return;}
+  const f=document.getElementById('cvf').files[0];
+  window.open('https://wa.me/242040612350?text='+encodeURIComponent(`Candidature spontanée\nNom: ${n}\nTél: ${t}\nEmail: ${document.getElementById('cve').value||'—'}\nDomaine: ${document.getElementById('cvd').value}\n${document.getElementById('cvm').value||''}\nCV: ${f?f.name:'À envoyer par email'}`),'_blank');
+  showToast('✅ Envoyez aussi votre CV à devousamoijobbing@gmail.com');
+}
+
+// ══ AVIS ══
+let sv=0;
+function setStar(n){sv=n;document.querySelectorAll('#si span').forEach((s,i)=>s.classList.toggle('active',i<n));}
+function pubAvis(){
+  const n=document.getElementById('an').value.trim();
+  const t=document.getElementById('at').value.trim();
+  if(!n||!t||!sv){showToast('⚠️ Remplissez tous les champs et choisissez une note.');return;}
+  const st='★'.repeat(sv)+'☆'.repeat(5-sv);
+  const c=document.createElement('div');c.className='av-card';
+  c.innerHTML=`<div class="av-icon" style="background:linear-gradient(135deg,rgba(26,107,60,.2),var(--bg3));">⭐</div><div class="av-body"><div class="av-stars">${st}</div><p class="av-text">"${t}"</p><div class="av-name">${n}</div><div class="av-role">Client Devousamoijobbing</div><div class="av-svc">${document.getElementById('as').value||''}</div></div>`;
+  document.getElementById('avis-container').appendChild(c);
+  ['an','at','as'].forEach(id=>document.getElementById(id).value='');
+  sv=0;document.querySelectorAll('#si span').forEach(s=>s.classList.remove('active'));
+  showToast('⭐ Merci pour votre avis !');
+}
+
+// ══ MODALS ══
+function openMo(id){document.getElementById('mo-'+id).classList.add('open');document.body.style.overflow='hidden';}
+function closeMo(id){document.getElementById('mo-'+id).classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',function(e){if(e.target===this){this.classList.remove('open');document.body.style.overflow='';}}));
+
+// ══ CHATBOT LESLIE ══
+const CR={
+  tarifs:'💛 Nos tarifs :\n🛋 Canapé 3P → 20 000 FCFA\n🛏 Matelas 2P → 15 000 FCFA\n🏠 Maison → dès 50 000 FCFA\n❄️ Entretien clim → 10 000 FCFA',
+  rdv:'Pour réserver 📅 : formulaire en ligne ou WhatsApp +242 04 061 23 50. Réponse dans l\'heure pour les particuliers !',
+  mat:'Notre matériel Kärcher 🔧 :\n• SC4 – Vapeur canapés/matelas\n• WD5 – Extraction eau/poussière\n• K4 – Haute pression extérieurs\n• Savon Marseille, savon noir, bicarbonate, APC, microfibres',
+  zones:'Tout Pointe-Noire 📍 : Ngoyo, Centre-ville, Tié-Tié, La Base, Tchimbamba, Mpita, OCH, Fouks.',
+  delai:'⚡ Particuliers (B2C) : réponse dans l\'heure !\n🏢 Entreprises (B2B) : devis complet sous 2h.',
+  bonjour:'Bonjour ! 😊 Bienvenue chez Devousamoijobbing. Comment puis-je vous aider ?',
+  merci:'Avec plaisir ! Belle journée 😊',
+  devis:'Devis gratuit sur WhatsApp +242 04 061 23 50. Réponse dans l\'heure pour les particuliers !'
+};
+function getResp(m){const l=m.toLowerCase();for(const[k,v]of Object.entries(CR)){if(l.includes(k))return v;}return 'Merci pour votre message 😊 Contactez-nous sur WhatsApp +242 04 061 23 50. Réponse dans l\'heure pour les particuliers !';}
+let chatOpen=false;
+function toggleChat(){
+  const w=document.getElementById('cw');
+  chatOpen=!chatOpen;
+  if(chatOpen){w.style.display='flex';requestAnimationFrame(()=>{w.style.opacity='1';w.style.transform='translateY(0) scale(1)';});}
+  else{w.style.opacity='0';w.style.transform='translateY(16px) scale(.97)';setTimeout(()=>{w.style.display='none';},300);}
+}
+function addMsg(t,tp){const c=document.getElementById('cm'),d=document.createElement('div');d.className='msg '+tp;d.innerHTML=t.replace(/\n/g,'<br/>');c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function sendMsg(){const i=document.getElementById('cin'),m=i.value.trim();if(!m)return;addMsg(m,'user');i.value='';setTimeout(()=>addMsg(getResp(m),'bot'),600);}
+function qr(k){addMsg({tarifs:'💰 Tarifs',rdv:'📅 RDV',mat:'🔧 Matériel Kärcher',zones:'📍 Zones',delai:'⚡ Délais'}[k],'user');setTimeout(()=>addMsg(CR[k],'bot'),500);}
+
+// ══ TOAST ══
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
+</script>
+</body>
+</html>
