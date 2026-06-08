@@ -1166,7 +1166,7 @@ function envoyerRDV(){
   renderRDV();
   const msg=`📅 RDV – Devousamoijobbing\nNom: ${p} ${document.getElementById('rn').value}\nTél: ${t}\nEmail: ${em||'—'}\nService: ${s}\nDate: ${d} · ${document.getElementById('rh').value}\nAdresse: ${document.getElementById('ra').value||'—'}\nNote: ${document.getElementById('rno').value||'—'}`;
   fetch('https://formspree.io/f/xjgdwpob',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({Prénom:p,Nom:document.getElementById('rn').value,Téléphone:t,Email:em||'—',Service:s,Date:d,Créneau:document.getElementById('rh').value,Adresse:document.getElementById('ra').value||'—',Notes:document.getElementById('rno').value||'—'})});
-  window.open('https://wa.me/242040612350?text='+encodeURIComponent(msg),'_blank');
+  fetch('https://formspree.io/f/xjgdwpob',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({Prenom:p,Telephone:t,Email:em||'non fourni',Service:s,Date:d})});window.open('https://wa.me/242040612350?text='+encodeURIComponent(msg),'_blank');
   if(em&&d){
     const st=d.replace(/-/g,'')+'T070000',en=d.replace(/-/g,'')+'T090000';
     setTimeout(()=>window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Devousamoijobbing+%E2%80%93+${encodeURIComponent(s)}&dates=${st}/${en}&details=RDV+confirm%C3%A9.+T%C3%A9l:+%2B242+04+061+23+50&location=Pointe-Noire,+Congo`,'_blank'),1200);
