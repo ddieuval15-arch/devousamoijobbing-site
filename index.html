@@ -245,6 +245,19 @@ nav.sc{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .c-price{font-size:clamp(22px,4vw,30px);font-weight:900;color:var(--or);}
 .c-btn{width:100%;background:var(--or);color:#080808;padding:13px;border:none;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-top:14px;transition:.3s;position:relative;overflow:hidden;}
 .c-btn:hover{opacity:.9;}
+.c-add{width:100%;background:transparent;border:1px dashed rgba(245,197,24,.4);color:var(--or);padding:11px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-top:14px;transition:.3s;}
+.c-add:hover{background:rgba(245,197,24,.08);border-color:var(--or);}
+.panier-list{margin-top:14px;display:flex;flex-direction:column;gap:8px;}
+.panier-empty{font-size:12px;color:var(--texte);font-style:italic;padding:4px 2px;line-height:1.6;}
+.panier-item{background:var(--bg3);border-left:3px solid var(--vert);border-radius:6px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+.pi-label{font-size:12px;color:var(--blanc);font-weight:600;}
+.pi-qty{font-size:11px;color:var(--texte);}
+.pi-promo{font-size:9px;font-weight:800;color:#080808;background:var(--or);padding:2px 6px;border-radius:10px;margin-left:8px;letter-spacing:.5px;}
+.pi-right{display:flex;align-items:center;gap:10px;}
+.pi-amount{font-size:12px;font-weight:700;color:var(--or);}
+.pi-remove{background:transparent;border:1px solid var(--bord);color:var(--texte);width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:13px;line-height:1;transition:.3s;}
+.pi-remove:hover{border-color:#e5484d;color:#e5484d;}
+.promo-badge{display:inline-flex;margin-left:8px;font-size:9px;font-weight:800;color:var(--or);background:rgba(245,197,24,.12);padding:2px 8px;border-radius:10px;letter-spacing:.5px;vertical-align:middle;}
 .dbadges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
 .db{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;}
 .db1{background:rgba(26,107,60,.15);border:1px solid rgba(26,107,60,.3);color:#4ade80;}
@@ -481,14 +494,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
   .hero h1{font-size:28px;}
 }
 </style>
-<<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KNM0PWGBFR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-KNM0PWGBFR');
-</script>>
+</head>
 <body>
 
 <div id="sp"></div>
@@ -773,12 +779,12 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
   </div>
   <div class="calc rv d1">
     <div class="cg2">
-      <div class="cf"><label>Service</label><select id="cs" onchange="calc()"><option value="0">Choisir…</option><option value="20000">Canapé 3 places</option><option value="25000">Canapé en L</option><option value="30000">Salon complet</option><option value="35000">Salon complet cuir</option><option value="10000">Matelas 1 place</option><option value="15000">Matelas 2 places</option><option value="20000">Matelas 3 places</option><option value="7500">Fauteuil</option><option value="3000">Chaise</option><option value="10000">Tapis</option><option value="5000">Rideau/pièce</option><option value="3000">Voilage/pièce</option><option value="50000">Maison complète</option><option value="20000">Installation clim</option><option value="10000">Entretien clim</option></select></div>
-      <div class="cf"><label>Quantité</label><input type="number" id="cq" value="1" min="1" max="20" oninput="calc()"/></div>
-      <div class="cf"><label>Promo salon + matelas ?</label><select id="cp" onchange="calc()"><option value="0">Non</option><option value="1">Oui (–10% matelas)</option></select></div>
-      <div class="cf"><label>Matelas (pour promo)</label><select id="cm2" onchange="calc()"><option value="0">Aucun</option><option value="10000">Matelas 1 place</option><option value="15000">Matelas 2 places</option><option value="20000">Matelas 3 places</option></select></div>
+      <div class="cf"><label>Service</label><select id="cs"><option value="0">Choisir…</option><option value="20000">Canapé 3 places</option><option value="25000">Canapé en L</option><option value="30000">Salon complet</option><option value="35000">Salon complet cuir</option><option value="10000">Matelas 1 place</option><option value="15000">Matelas 2 places</option><option value="20000">Matelas 3 places</option><option value="7500">Fauteuil</option><option value="3000">Chaise</option><option value="10000">Tapis</option><option value="5000">Rideau/pièce</option><option value="3000">Voilage/pièce</option><option value="50000">Maison complète</option><option value="20000">Installation clim</option><option value="10000">Entretien clim</option></select></div>
+      <div class="cf"><label>Quantité</label><input type="number" id="cq" value="1" min="1" max="20"/></div>
     </div>
-    <div class="c-res"><div><p style="font-size:13px;color:var(--texte);">Estimation totale</p><p style="font-size:10px;color:var(--texte);margin-top:2px;">Hors déplacement · À confirmer</p></div><div class="c-price" id="cp2">—</div></div>
+    <button class="c-add" onclick="ajouterService()">+ Ajouter ce service au devis</button>
+    <div id="panier-list" class="panier-list"><p class="panier-empty">Aucun service ajouté pour le moment. Ajoutez autant de services que nécessaire (canapé, matelas, tapis…) pour une estimation combinée.</p></div>
+    <div class="c-res"><div><p style="font-size:13px;color:var(--texte);">Estimation totale<span id="promo-badge" class="promo-badge" style="display:none;">Promo -10% matelas appliquée</span></p><p style="font-size:10px;color:var(--texte);margin-top:2px;">Hors déplacement · À confirmer</p></div><div class="c-price" id="cp2">—</div></div>
     <button class="c-btn" onclick="demanderDevis()">Obtenir mon devis gratuit →</button>
   </div>
 </section>
@@ -921,7 +927,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
       <div class="ci">
         <div class="ci-it"><div class="ci-ic">📞</div><div><h5>Téléphone</h5><a href="tel:+242069136364">+242 06 913 63 64</a></div></div>
         <div class="ci-it"><div class="ci-ic">💬</div><div><h5>WhatsApp</h5><a href="https://wa.me/242040612350">+242 04 061 23 50</a></div></div>
-        <div class="ci-it"><div class="ci-ic">✉️</div><div><h5>Email</h5><a href="mailto:contact@devousamoijobbing.comk.fr">contact@devousamoijobbing.comm</a></div></div>
+        <div class="ci-it"><div class="ci-ic">✉️</div><div><h5>Email</h5><a href="mailto:contact@devousamoijobbing.com">contact@devousamoijobbing.com</a><br/><a href="mailto:contact@devousamoijobbing.com">contact@devousamoijobbing.com</a></div></div>
         <div class="ci-it"><div class="ci-ic">📍</div><div><h5>Adresse</h5><p>Arrêt Orphelinat, Ngoyo<br/>Pointe-Noire, République du Congo</p></div></div>
         <div class="ci-it"><div class="ci-ic">🕐</div><div><h5>Horaires</h5><p>Lun–Sam : 7h–19h · Dim : Sur RDV</p></div></div>
       </div>
@@ -1147,17 +1153,55 @@ function tFaq(el){
   if(!open)item.classList.add('open');
 }
 
-// ══ CALC ══
-function calc(){
-  const s=parseInt(document.getElementById('cs').value)||0;
-  const q=parseInt(document.getElementById('cq').value)||1;
-  const p=parseInt(document.getElementById('cp').value)||0;
-  const m=parseInt(document.getElementById('cm2').value)||0;
-  let t=s*q;if(p&&m)t+=m*.9;
-  document.getElementById('cp2').textContent=t>0?t.toLocaleString('fr-FR')+' FCFA':'—';
+// ══ CALC (panier multi-services) ══
+let panier=[];
+function ajouterService(){
+  const sel=document.getElementById('cs');
+  const price=parseInt(sel.value)||0;
+  if(!price){sel.focus();return;}
+  const label=sel.options[sel.selectedIndex].text;
+  const qty=parseInt(document.getElementById('cq').value)||1;
+  panier.push({label:label,price:price,qty:qty});
+  document.getElementById('cq').value=1;
+  sel.selectedIndex=0;
+  renderPanier();
+}
+function retirerService(i){
+  panier.splice(i,1);
+  renderPanier();
+}
+function renderPanier(){
+  const list=document.getElementById('panier-list');
+  const badge=document.getElementById('promo-badge');
+  if(panier.length===0){
+    list.innerHTML='<p class="panier-empty">Aucun service ajouté pour le moment. Ajoutez autant de services que nécessaire (canapé, matelas, tapis…) pour une estimation combinée.</p>';
+    document.getElementById('cp2').textContent='—';
+    badge.style.display='none';
+    return;
+  }
+  const hasSalon=panier.some(function(it){return it.label.indexOf('Salon complet')===0;});
+  const hasMatelas=panier.some(function(it){return it.label.indexOf('Matelas')===0;});
+  let total=0,html='';
+  panier.forEach(function(it,i){
+    let lt=it.price*it.qty;
+    const promo=hasSalon&&it.label.indexOf('Matelas')===0;
+    if(promo)lt=lt*0.9;
+    total+=lt;
+    html+='<div class="panier-item"><div><span class="pi-label">'+it.label+'</span><span class="pi-qty"> × '+it.qty+'</span>'+(promo?'<span class="pi-promo">-10%</span>':'')+'</div><div class="pi-right"><span class="pi-amount">'+Math.round(lt).toLocaleString('fr-FR')+' FCFA</span><button class="pi-remove" onclick="retirerService('+i+')" aria-label="Retirer">×</button></div></div>';
+  });
+  list.innerHTML=html;
+  document.getElementById('cp2').textContent=total.toLocaleString('fr-FR')+' FCFA';
+  badge.style.display=(hasSalon&&hasMatelas)?'inline-flex':'none';
 }
 function demanderDevis(){
-  window.open('https://wa.me/242040612350?text='+encodeURIComponent('Bonjour, estimation calculateur : '+document.getElementById('cp2').textContent+'. Je souhaite un devis.'),'_blank');
+  if(panier.length===0){
+    document.getElementById('cs').focus();
+    return;
+  }
+  const lignes=panier.map(function(it){return '- '+it.label+' × '+it.qty;}).join('\n');
+  const total=document.getElementById('cp2').textContent;
+  const msg='Bonjour, voici mon estimation calculateur :\n'+lignes+'\nTotal estimé : '+total+'\nJe souhaite un devis.';
+  window.open('https://wa.me/242040612350?text='+encodeURIComponent(msg),'_blank');
 }
 
 // ══ RDV ══
@@ -1172,7 +1216,7 @@ function envoyerRDV(){
   rdvs.push({p,n:document.getElementById('rn').value,t,s,d,h:document.getElementById('rh').value,a:document.getElementById('ra').value});
   renderRDV();
   const msg=`📅 RDV – Devousamoijobbing\nNom: ${p} ${document.getElementById('rn').value}\nTél: ${t}\nEmail: ${em||'—'}\nService: ${s}\nDate: ${d} · ${document.getElementById('rh').value}\nAdresse: ${document.getElementById('ra').value||'—'}\nNote: ${document.getElementById('rno').value||'—'}`;
-  fetch('https://formspree.io/f/xjgdwpob',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({Prenom:p,Telephone:t,Email:em||'non fourni',Service:s,Date:d})});window.open('https://wa.me/242040612350?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/242040612350?text='+encodeURIComponent(msg),'_blank');
   if(em&&d){
     const st=d.replace(/-/g,'')+'T070000',en=d.replace(/-/g,'')+'T090000';
     setTimeout(()=>window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Devousamoijobbing+%E2%80%93+${encodeURIComponent(s)}&dates=${st}/${en}&details=RDV+confirm%C3%A9.+T%C3%A9l:+%2B242+04+061+23+50&location=Pointe-Noire,+Congo`,'_blank'),1200);
