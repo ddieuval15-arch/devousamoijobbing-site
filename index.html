@@ -1052,6 +1052,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
   <div class="cm" id="cm"><div class="msg bot">Bonjour ! 😊 Je suis <strong>Leslie</strong>. Comment puis-je vous aider ?</div></div>
   <div class="cq">
     <button class="cqb" onclick="qr('tarifs')">💰 Tarifs</button>
+    <button class="cqb" onclick="qr('calc')">🧮 Devis</button>
     <button class="cqb" onclick="qr('rdv')">📅 RDV</button>
     <button class="cqb" onclick="qr('mat')">🔧 Matériel</button>
     <button class="cqb" onclick="qr('zones')">📍 Zones</button>
@@ -1348,17 +1349,51 @@ function closeMo(id){document.getElementById('mo-'+id).classList.remove('open');
 document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',function(e){if(e.target===this){this.classList.remove('open');document.body.style.overflow='';}}));
 
 // ══ CHATBOT LESLIE ══
+const WA_BTN='<a href="https://wa.me/242040612350" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:var(--or);color:#080808;padding:8px 14px;border-radius:6px;font-weight:700;text-decoration:none;font-size:12px;">💬 Discuter sur WhatsApp</a>';
+const CALC_BTN='<button onclick="toggleChat();document.getElementById(\'calculateur\').scrollIntoView({behavior:\'smooth\'});" style="margin-top:8px;background:var(--or);color:#080808;border:none;padding:8px 14px;border-radius:6px;font-weight:700;cursor:pointer;font-size:12px;">🧮 Ouvrir le calculateur</button>';
+const RDV_BTN='<button onclick="toggleChat();document.getElementById(\'rdv\').scrollIntoView({behavior:\'smooth\'});" style="margin-top:8px;background:var(--or);color:#080808;border:none;padding:8px 14px;border-radius:6px;font-weight:700;cursor:pointer;font-size:12px;">📅 Ouvrir le formulaire</button>';
+
 const CR={
-  tarifs:'💛 Nos tarifs :\n🛋 Canapé 3P → 20 000 FCFA\n🛏 Matelas 2P → 15 000 FCFA\n🏠 Maison → dès 50 000 FCFA\n❄️ Entretien clim → 10 000 FCFA',
-  rdv:'Pour réserver 📅 : formulaire en ligne ou WhatsApp +242 04 061 23 50. Réponse dans l\'heure pour les particuliers !',
+  tarifs:'💛 Nos tarifs :\n🛋 Canapé 3P → 20 000 FCFA\n🛏 Matelas 2P → 15 000 FCFA\n🏠 Maison → dès 50 000 FCFA\n❄️ Entretien clim → 10 000 FCFA\n🪟 Tapis/rideaux → dès 5 000 FCFA<br/>'+CALC_BTN,
+  rdv:'Pour réserver 📅 : formulaire en ligne ou WhatsApp. Réponse dans l\'heure pour les particuliers !<br/>'+RDV_BTN,
   mat:'Notre matériel Kärcher 🔧 :\n• SC4 – Vapeur canapés/matelas\n• WD5 – Extraction eau/poussière\n• K4 – Haute pression extérieurs\n• Savon Marseille, savon noir, bicarbonate, APC, microfibres',
   zones:'Tout Pointe-Noire 📍 : Ngoyo, Centre-ville, Tié-Tié, La Base, Tchimbamba, Mpita, OCH, Fouks.',
   delai:'⚡ Particuliers (B2C) : réponse dans l\'heure !\n🏢 Entreprises (B2B) : devis complet sous 2h.',
+  clim:'❄️ Climatisation split :\n• Installation → 20 000 FCFA\n• Entretien → 10 000 FCFA\n• Dépannage → sur devis',
+  hygiene:'🛡️ Hygiène 3D : désinfection complète, dératisation, traitement anti-nuisibles. Produits 100% naturels. Tarif sur devis selon superficie.',
+  chantier:'🏗️ Fin de chantier : nettoyage complet post-travaux (poussière de ciment, résidus, vitres). Tarif sur devis selon surface.'+'<br/>'+WA_BTN,
+  tapis:'🪟 Tapis dès 10 000 FCFA · Rideaux 5 000 FCFA/pièce · Voilage 3 000 FCFA/pièce.',
+  paiement:'💳 Paiement après validation de la prestation : espèces ou Mobile Money (Airtel Money, MTN Money).',
   bonjour:'Bonjour ! 😊 Bienvenue chez Devousamoijobbing. Comment puis-je vous aider ?',
   merci:'Avec plaisir ! Belle journée 😊',
-  devis:'Devis gratuit sur WhatsApp +242 04 061 23 50. Réponse dans l\'heure pour les particuliers !'
+  devis:'Devis gratuit en moins d\'une heure pour les particuliers !<br/>'+CALC_BTN+' '+WA_BTN
 };
-function getResp(m){const l=m.toLowerCase();for(const[k,v]of Object.entries(CR)){if(l.includes(k))return v;}return 'Merci pour votre message 😊 Contactez-nous sur WhatsApp +242 04 061 23 50. Réponse dans l\'heure pour les particuliers !';}
+
+// Catégories dans l'ordre de priorité (les plus spécifiques d'abord pour éviter les faux positifs)
+const CR_RULES=[
+  ['clim',['climatisation','climatiseur','clim','split','froid']],
+  ['hygiene',['hygiene','deratisation','desinfection','nuisible']],
+  ['chantier',['chantier']],
+  ['tapis',['tapis','moquette','rideau','voilage']],
+  ['paiement',['paiement','payer','mobile money','airtel','mtn money','especes']],
+  ['tarifs',['tarif','prix','combien coute','cout','ca coute']],
+  ['rdv',['rdv','rendez-vous','reservation','reserver']],
+  ['mat',['materiel','karcher','equipement']],
+  ['zones',['zone','quartier','adresse','ou etes','ou intervenez','localisation']],
+  ['delai',['delai','rapide','combien de temps','duree']],
+  ['devis',['devis']],
+  ['bonjour',['bonjour','salut','bonsoir','coucou','hello','bsr']],
+  ['merci',['merci']]
+];
+
+function normalize(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function getResp(m){
+  const l=normalize(m);
+  for(const[key,triggers]of CR_RULES){
+    if(triggers.some(t=>l.includes(t)))return CR[key];
+  }
+  return 'Je n\'ai pas toute l\'info sous la main 🙈 Mais je vous mets en relation directe, réponse dans l\'heure pour les particuliers :<br/>'+WA_BTN;
+}
 let chatOpen=false;
 function toggleChat(){
   const w=document.getElementById('cw');
@@ -1366,9 +1401,9 @@ function toggleChat(){
   if(chatOpen){w.style.display='flex';requestAnimationFrame(()=>{w.style.opacity='1';w.style.transform='translateY(0) scale(1)';});}
   else{w.style.opacity='0';w.style.transform='translateY(16px) scale(.97)';setTimeout(()=>{w.style.display='none';},300);}
 }
-function addMsg(t,tp){const c=document.getElementById('cm'),d=document.createElement('div');d.className='msg '+tp;d.innerHTML=t.replace(/\n/g,'<br/>');c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function addMsg(t,tp){const c=document.getElementById('cm'),d=document.createElement('div');d.className='msg '+tp;if(tp==='user'){d.textContent=t;}else{d.innerHTML=t.replace(/\n/g,'<br/>');}c.appendChild(d);c.scrollTop=c.scrollHeight;}
 function sendMsg(){const i=document.getElementById('cin'),m=i.value.trim();if(!m)return;addMsg(m,'user');i.value='';setTimeout(()=>addMsg(getResp(m),'bot'),600);}
-function qr(k){addMsg({tarifs:'💰 Tarifs',rdv:'📅 RDV',mat:'🔧 Matériel Kärcher',zones:'📍 Zones',delai:'⚡ Délais'}[k],'user');setTimeout(()=>addMsg(CR[k],'bot'),500);}
+function qr(k){addMsg({tarifs:'💰 Tarifs',rdv:'📅 RDV',mat:'🔧 Matériel',zones:'📍 Zones',delai:'⚡ Délais',calc:'🧮 Calculateur'}[k],'user');setTimeout(()=>addMsg(k==='calc'?('Notre calculateur est juste ici 👇'+'<br/>'+CALC_BTN):CR[k],'bot'),500);}
 
 // ══ TOAST ══
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
