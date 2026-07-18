@@ -586,6 +586,7 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
     <p class="hsub rv d2">Nettoyage professionnel au Kärcher SC4, climatisation split et hygiène 3D — matériel pro, résultats garantis à Pointe-Noire.</p>
     <div class="hbtns rv d3">
       <a href="#rdv" class="btn-or">📅 Prendre rendez-vous</a>
+      <a href="#calculateur" class="btn-gh">💰 Estimer mon devis</a>
       <a href="#tarifs" class="btn-gh">Voir les tarifs</a>
     </div>
     <div class="hstats">
@@ -630,6 +631,28 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
     <div class="mc" onclick="goTo('#tarifs')"><span class="mc-i">🛡️</span><div><div class="mc-n">Hygiène 3D</div><div class="mc-p">Sur devis</div></div></div>
   </div>
 </div>
+
+<!-- CALCULATEUR -->
+<section class="sec bg2" id="calculateur">
+  <div class="cx">
+    <div class="stag rv">Estimez votre budget</div>
+    <h2 class="stitle rv d1">Calculateur de prix</h2>
+    <div class="gl rv d2"></div>
+    <p class="ssub rv d3">Estimation instantanée. Confirmation gratuite sur WhatsApp.</p>
+    <div class="dbadges rv d4"><span class="db db1">⚡ B2C : Réponse dans l'heure</span><span class="db db2">🏢 B2B : Devis sous 2h</span></div>
+    <div class="t-promo rv d2" style="margin-top:18px;max-width:520px;margin-left:auto;margin-right:auto;"><span style="font-size:20px;flex-shrink:0;">🎁</span><p><strong>Offre de bienvenue :</strong> –10% sur votre première prestation, tous services confondus !</p></div>
+  </div>
+  <div class="calc rv d1">
+    <div class="cg2">
+      <div class="cf"><label>Service</label><select id="cs"><option value="0">Choisir…</option><option value="20000">Canapé 3 places</option><option value="25000">Canapé en L</option><option value="30000">Salon complet</option><option value="35000">Salon complet cuir</option><option value="10000">Matelas 1 place</option><option value="15000">Matelas 2 places</option><option value="20000">Matelas 3 places</option><option value="7500">Fauteuil</option><option value="3000">Chaise</option><option value="10000">Tapis</option><option value="5000">Rideau/pièce</option><option value="3000">Voilage/pièce</option><option value="50000">Maison complète</option><option value="20000">Installation clim</option><option value="10000">Entretien clim</option></select></div>
+      <div class="cf"><label>Quantité</label><input type="number" id="cq" value="1" min="1" max="20"/></div>
+    </div>
+    <button class="c-add" onclick="ajouterService()">+ Ajouter ce service au devis</button>
+    <div id="panier-list" class="panier-list"><p class="panier-empty">Aucun service ajouté pour le moment. Ajoutez autant de services que nécessaire (canapé, matelas, tapis…) pour une estimation combinée.</p></div>
+    <div class="c-res"><div><p style="font-size:13px;color:var(--texte);">Estimation totale<span id="promo-badge" class="promo-badge" style="display:none;">Promo -10% matelas appliquée</span></p><p style="font-size:10px;color:var(--texte);margin-top:2px;">Hors déplacement · À confirmer</p></div><div class="c-price" id="cp2">—</div></div>
+    <button class="c-btn" onclick="demanderDevis()">Obtenir mon devis gratuit →</button>
+  </div>
+</section>
 
 <!-- SERVICES -->
 <section class="sec" id="services">
@@ -777,30 +800,8 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
   </div>
 </section>
 
-<!-- CALCULATEUR -->
-<section class="sec" id="calculateur">
-  <div class="cx">
-    <div class="stag rv">Estimez votre budget</div>
-    <h2 class="stitle rv d1">Calculateur de prix</h2>
-    <div class="gl rv d2"></div>
-    <p class="ssub rv d3">Estimation instantanée. Confirmation gratuite sur WhatsApp.</p>
-    <div class="dbadges rv d4"><span class="db db1">⚡ B2C : Réponse dans l'heure</span><span class="db db2">🏢 B2B : Devis sous 2h</span></div>
-    <div class="t-promo rv d2" style="margin-top:18px;max-width:520px;margin-left:auto;margin-right:auto;"><span style="font-size:20px;flex-shrink:0;">🎁</span><p><strong>Offre de bienvenue :</strong> –10% sur votre première prestation, tous services confondus !</p></div>
-  </div>
-  <div class="calc rv d1">
-    <div class="cg2">
-      <div class="cf"><label>Service</label><select id="cs"><option value="0">Choisir…</option><option value="20000">Canapé 3 places</option><option value="25000">Canapé en L</option><option value="30000">Salon complet</option><option value="35000">Salon complet cuir</option><option value="10000">Matelas 1 place</option><option value="15000">Matelas 2 places</option><option value="20000">Matelas 3 places</option><option value="7500">Fauteuil</option><option value="3000">Chaise</option><option value="10000">Tapis</option><option value="5000">Rideau/pièce</option><option value="3000">Voilage/pièce</option><option value="50000">Maison complète</option><option value="20000">Installation clim</option><option value="10000">Entretien clim</option></select></div>
-      <div class="cf"><label>Quantité</label><input type="number" id="cq" value="1" min="1" max="20"/></div>
-    </div>
-    <button class="c-add" onclick="ajouterService()">+ Ajouter ce service au devis</button>
-    <div id="panier-list" class="panier-list"><p class="panier-empty">Aucun service ajouté pour le moment. Ajoutez autant de services que nécessaire (canapé, matelas, tapis…) pour une estimation combinée.</p></div>
-    <div class="c-res"><div><p style="font-size:13px;color:var(--texte);">Estimation totale<span id="promo-badge" class="promo-badge" style="display:none;">Promo -10% matelas appliquée</span></p><p style="font-size:10px;color:var(--texte);margin-top:2px;">Hors déplacement · À confirmer</p></div><div class="c-price" id="cp2">—</div></div>
-    <button class="c-btn" onclick="demanderDevis()">Obtenir mon devis gratuit →</button>
-  </div>
-</section>
-
 <!-- RDV -->
-<section class="sec bg2" id="rdv">
+<section class="sec" id="rdv">
   <div class="stag rv">Réservation en ligne</div>
   <h2 class="stitle rv d1">Prenez rendez-vous<br/>en quelques clics.</h2>
   <div class="gl rv d2"></div>
