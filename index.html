@@ -291,6 +291,13 @@ nav.sc{box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .fr2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .fs{width:100%;background:var(--or);color:#080808;padding:12px;border:none;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:.3s;margin-top:4px;}
 .fs:hover{opacity:.85;}
+.fg-more{margin-bottom:13px;border:1px dashed var(--bord);border-radius:6px;padding:2px 13px;}
+.fg-more summary{font-size:11px;letter-spacing:.5px;color:var(--or);cursor:pointer;padding:10px 0;list-style:none;}
+.fg-more summary::-webkit-details-marker{display:none;}
+.fg-more summary::before{content:'▸ ';}
+.fg-more[open] summary::before{content:'▾ ';}
+.fg-more[open] summary{border-bottom:1px solid var(--bord);}
+.fg-more-body{padding-top:13px;}
 .file-wrap{position:relative;}
 .file-inp{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
 .file-lbl{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--bg);border:1px dashed rgba(245,197,24,.35);border-radius:6px;font-size:13px;color:var(--texte);cursor:pointer;transition:.3s;}
@@ -800,14 +807,19 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
   <div class="g2" style="margin-top:36px;">
     <div class="fbox rv-l">
       <h3>📅 Nouveau rendez-vous</h3>
-      <div class="fr2"><div class="fg"><label>Prénom *</label><input type="text" id="rp" placeholder="Jean"/></div><div class="fg"><label>Nom</label><input type="text" id="rn" placeholder="Moukala"/></div></div>
-      <div class="fg"><label>Téléphone / WhatsApp *</label><input type="tel" id="rt" placeholder="+242 06 XXX XX XX"/></div>
-      <div class="fg"><label>Email (pour Calendar)</label><input type="email" id="re" placeholder="votre@email.com"/></div>
+      <div class="fr2"><div class="fg"><label>Prénom *</label><input type="text" id="rp" placeholder="Jean"/></div><div class="fg"><label>Téléphone / WhatsApp *</label><input type="tel" id="rt" placeholder="+242 06 XXX XX XX"/></div></div>
       <div class="fg"><label>Service *</label><select id="rs"><option value="">Choisir…</option><option>Nettoyage canapé</option><option>Nettoyage matelas</option><option>Nettoyage salon complet</option><option>Nettoyage tapis / rideaux</option><option>Nettoyage maison complet</option><option>Fin de chantier</option><option>Installation climatisation</option><option>Entretien climatisation</option><option>Dépannage climatisation</option><option>Hygiène 3D</option><option>Contrat entreprise (B2B)</option></select></div>
-      <div class="fr2"><div class="fg"><label>Date *</label><input type="date" id="rd"/></div><div class="fg"><label>Créneau</label><select id="rh"><option>7h–9h</option><option>9h–11h</option><option>11h–13h</option><option>14h–16h</option><option>16h–18h</option></select></div></div>
-      <div class="fg"><label>Adresse</label><input type="text" id="ra" placeholder="Quartier, rue, repère…"/></div>
-      <div class="fg"><label>Notes</label><textarea id="rno" placeholder="Précisions utiles…"></textarea></div>
-      <button class="fs" onclick="envoyerRDV()">✅ Confirmer mon rendez-vous →</button>
+      <p style="font-size:12px;color:var(--texte);margin:-4px 0 4px;">Date, créneau et adresse ? On les cale ensemble sur WhatsApp.</p>
+      <details class="fg-more">
+        <summary>+ Ajouter des précisions maintenant (optionnel)</summary>
+        <div class="fg-more-body">
+          <div class="fr2"><div class="fg"><label>Nom</label><input type="text" id="rn" placeholder="Moukala"/></div><div class="fg"><label>Email (pour Calendar)</label><input type="email" id="re" placeholder="votre@email.com"/></div></div>
+          <div class="fr2"><div class="fg"><label>Date souhaitée</label><input type="date" id="rd"/></div><div class="fg"><label>Créneau</label><select id="rh"><option value="">Non précisé</option><option>7h–9h</option><option>9h–11h</option><option>11h–13h</option><option>14h–16h</option><option>16h–18h</option></select></div></div>
+          <div class="fg"><label>Adresse</label><input type="text" id="ra" placeholder="Quartier, rue, repère…"/></div>
+          <div class="fg"><label>Notes</label><textarea id="rno" placeholder="Précisions utiles…"></textarea></div>
+        </div>
+      </details>
+      <button class="fs" onclick="envoyerRDV()">✅ Confirmer sur WhatsApp →</button>
     </div>
     <div class="rdv-info rv-r">
       <div class="ri"><h4>⚡ B2C : Réponse dans l'heure</h4><p>Particulier ? Confirmation garantie <strong>dans l'heure</strong> sur WhatsApp ou par appel.</p></div>
@@ -1252,19 +1264,28 @@ function envoyerRDV(){
   const t=document.getElementById('rt').value.trim();
   const s=document.getElementById('rs').value;
   const d=document.getElementById('rd').value;
+  const h=document.getElementById('rh').value;
+  const a=document.getElementById('ra').value.trim();
+  const n=document.getElementById('rn').value.trim();
   const em=document.getElementById('re').value.trim();
-  if(!p||!t||!s||!d){showToast('⚠️ Remplissez les champs obligatoires (*).');return;}
-  rdvs.push({p,n:document.getElementById('rn').value,t,s,d,h:document.getElementById('rh').value,a:document.getElementById('ra').value});
+  if(!p||!t||!s){showToast('⚠️ Remplissez les champs obligatoires (*).');return;}
+  rdvs.push({p,n,t,s,d:d||'à confirmer',h:h||'à confirmer',a});
   renderRDV();
-  const msg=`📅 RDV – Devousamoijobbing\nNom: ${p} ${document.getElementById('rn').value}\nTél: ${t}\nEmail: ${em||'—'}\nService: ${s}\nDate: ${d} · ${document.getElementById('rh').value}\nAdresse: ${document.getElementById('ra').value||'—'}\nNote: ${document.getElementById('rno').value||'—'}`;
+  const msg=`📅 Demande de RDV – Devousamoijobbing\nNom: ${p}${n?' '+n:''}\nTél: ${t}\nService: ${s}`
+    +(em?`\nEmail: ${em}`:'')
+    +(d?`\nDate souhaitée: ${d}${h?' · '+h:''}`:`\nDate/créneau: à convenir ensemble sur WhatsApp`)
+    +(a?`\nAdresse: ${a}`:'')
+    +(document.getElementById('rno').value.trim()?`\nNote: ${document.getElementById('rno').value.trim()}`:'');
+  fetch('https://formspree.io/f/xjgdwpob',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({Prénom:p,Nom:n||'—',Téléphone:t,Email:em||'—',Service:s,Date:d||'à confirmer',Créneau:h||'à confirmer',Adresse:a||'—',Notes:document.getElementById('rno').value.trim()||'—'})});
   window.open('https://wa.me/242040612350?text='+encodeURIComponent(msg),'_blank');
   if(em&&d){
     const st=d.replace(/-/g,'')+'T070000',en=d.replace(/-/g,'')+'T090000';
     setTimeout(()=>window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Devousamoijobbing+%E2%80%93+${encodeURIComponent(s)}&dates=${st}/${en}&details=RDV+confirm%C3%A9.+T%C3%A9l:+%2B242+04+061+23+50&location=Pointe-Noire,+Congo`,'_blank'),1200);
   }
-  showToast('✅ RDV enregistré ! WhatsApp ouvert'+(em?' + Calendar':'')+'.');
+  showToast('✅ Demande envoyée ! WhatsApp ouvert'+(em&&d?' + Calendar':'')+'.');
   ['rp','rn','rt','re','rd','ra','rno'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('rs').value='';
+  document.getElementById('rh').value='';
 }
 function renderRDV(){
   const el=document.getElementById('rdvList');
