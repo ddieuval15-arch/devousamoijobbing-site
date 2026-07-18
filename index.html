@@ -1201,7 +1201,41 @@ function demanderDevis(){
   const lignes=panier.map(function(it){return '- '+it.label+' × '+it.qty;}).join('\n');
   const total=document.getElementById('cp2').textContent;
   const msg='Bonjour, voici mon estimation calculateur :\n'+lignes+'\nTotal estimé : '+total+'\nJe souhaite un devis.';
+
+  // Pré-remplir le formulaire de rendez-vous avec le contenu du panier
+  const map=[
+    [/^Salon complet/,'Nettoyage salon complet'],
+    [/^Canapé/,'Nettoyage canapé'],
+    [/^Matelas/,'Nettoyage matelas'],
+    [/^Tapis|^Rideau|^Voilage/,'Nettoyage tapis / rideaux'],
+    [/^Maison complète/,'Nettoyage maison complet'],
+    [/^Installation clim/,'Installation climatisation'],
+    [/^Entretien clim/,'Entretien climatisation']
+  ];
+  const rs=document.getElementById('rs');
+  if(rs){
+    let matched='';
+    for(const it of panier){
+      const found=map.find(function(m){return m[0].test(it.label);});
+      if(found){matched=found[1];break;}
+    }
+    if(matched){
+      for(const opt of rs.options){ if(opt.text===matched){ rs.value=matched; break; } }
+    }
+  }
+  const rno=document.getElementById('rno');
+  if(rno){
+    rno.value='Estimation calculateur :\n'+lignes+'\nTotal estimé : '+total;
+  }
+
   window.open('https://wa.me/242040612350?text='+encodeURIComponent(msg),'_blank');
+
+  const rdvSection=document.getElementById('rdv');
+  if(rdvSection){
+    rdvSection.scrollIntoView({behavior:'smooth'});
+    const rp=document.getElementById('rp');
+    if(rp) setTimeout(function(){rp.focus();},400);
+  }
 }
 
 // ══ RDV ══
