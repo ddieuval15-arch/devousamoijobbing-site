@@ -864,6 +864,10 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
     <div class="stag rv">Témoignages</div>
     <h2 class="stitle rv d1">Ils nous font confiance.</h2>
     <div class="gl rv d2"></div>
+    <div class="rv d3" style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px;">
+      <span style="font-size:20px;color:var(--or);letter-spacing:2px;">★★★★★</span>
+      <span style="font-size:14px;color:var(--texte);" id="rating-text">5.0/5 · basé sur 4 avis clients</span>
+    </div>
   </div>
   <div class="avis-grid" id="avis-container">
     <div class="av-card rv d1">
@@ -1294,6 +1298,13 @@ function envCV(){
 
 // ══ AVIS ══
 let sv=0;
+let totalAvisCount=4,totalAvisStars=20;
+function updateRatingSummary(){
+  const el=document.getElementById('rating-text');
+  if(!el)return;
+  const avg=(totalAvisStars/totalAvisCount).toFixed(1);
+  el.textContent=avg+'/5 · basé sur '+totalAvisCount+' avis clients';
+}
 function setStar(n){sv=n;document.querySelectorAll('#si span').forEach((s,i)=>s.classList.toggle('active',i<n));}
 function pubAvis(){
   const n=document.getElementById('an').value.trim();
@@ -1303,6 +1314,7 @@ function pubAvis(){
   const c=document.createElement('div');c.className='av-card';
   c.innerHTML=`<div class="av-icon" style="background:linear-gradient(135deg,rgba(26,107,60,.2),var(--bg3));">⭐</div><div class="av-body"><div class="av-stars">${st}</div><p class="av-text">"${t}"</p><div class="av-name">${n}</div><div class="av-role">Client Devousamoijobbing</div><div class="av-svc">${document.getElementById('as').value||''}</div></div>`;
   document.getElementById('avis-container').appendChild(c);
+  totalAvisCount++;totalAvisStars+=sv;updateRatingSummary();
   ['an','at','as'].forEach(id=>document.getElementById(id).value='');
   sv=0;document.querySelectorAll('#si span').forEach(s=>s.classList.remove('active'));
   showToast('⭐ Merci pour votre avis !');
