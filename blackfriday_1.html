@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Black Friday Noir & Or — Devousamoijobbing</title>
+<meta name="description" content="Du 12 au 27 novembre : jusqu'à -25% sur le nettoyage de matelas, canapés et salons à Pointe-Noire. 18 créneaux seulement.">
+<style>
+:root{--black:#0A0A0A;--gold:#F5C518;--green:#1A6B3C;--card:#141414;--line:#2a2a2a;--txt:#f4f4f4;--mute:#a8a8a8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;-webkit-text-size-adjust:100%}
+.wrap{max-width:960px;margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:.2px}
+a{color:inherit}
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:8px;background:#000;border:1px solid var(--line);padding:8px 12px;border-radius:6px;font-weight:800;font-size:13px;letter-spacing:.5px;color:#fff;white-space:nowrap}
+.logo i{color:var(--gold);font-style:italic;text-transform:lowercase}
+.logo svg{width:12px;height:16px;vertical-align:-2px}
+.logo .arr{color:var(--gold);font-size:14px}
+header{padding:16px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(10,10,10,.94);backdrop-filter:blur(6px);z-index:20}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.btn{display:inline-block;background:var(--gold);color:#000;font-weight:800;padding:13px 22px;border-radius:999px;text-decoration:none;border:0;font-size:15px;cursor:pointer;text-align:center}
+.btn.sm{padding:9px 16px;font-size:13px}
+.btn.wa{background:#25D366;color:#04210f}
+/* hero */
+.hero{padding:44px 0 30px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,.16),transparent 60%)}
+.tag{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:12px;letter-spacing:2px;padding:6px 14px;border-radius:999px;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-size:clamp(34px,8vw,64px);line-height:1.05;margin-bottom:14px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p.sub{color:var(--mute);max-width:560px;margin:0 auto 22px;font-size:17px}
+.big{font-family:Georgia,serif;font-size:clamp(54px,14vw,110px);color:var(--gold);line-height:1;margin:6px 0 4px}
+.big small{font-size:.32em;color:var(--txt);display:block;letter-spacing:3px;font-family:-apple-system,Segoe UI,Arial,sans-serif;font-weight:600}
+.early{display:none;margin:0 auto 20px;max-width:520px;background:rgba(26,107,60,.25);border:1px solid var(--green);color:#9be3b5;padding:10px 14px;border-radius:10px;font-size:14px}
+.early.on{display:block}
+/* countdown */
+.cd{display:flex;justify-content:center;gap:10px;margin:22px 0 8px}
+.cd div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 0;min-width:68px}
+.cd b{display:block;font-size:26px;color:var(--gold);font-family:Georgia,serif}
+.cd span{font-size:11px;color:var(--mute);letter-spacing:1px;text-transform:uppercase}
+.cdlabel{font-size:13px;color:var(--mute)}
+section{padding:42px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(26px,5vw,38px);margin-bottom:6px;text-align:center}
+section .lead{text-align:center;color:var(--mute);max-width:560px;margin:0 auto 26px}
+/* packs */
+.packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.pack{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px;position:relative;cursor:pointer;transition:.15s}
+.pack:hover,.pack.sel{border-color:var(--gold);transform:translateY(-2px)}
+.pack.sel{box-shadow:0 0 0 1px var(--gold)}
+.pack h3{font-size:20px}
+.pack .inc{color:var(--mute);font-size:14px;flex:1}
+.pack .old{text-decoration:line-through;color:var(--mute);font-size:14px}
+.pack .new{font-family:Georgia,serif;font-size:30px;color:var(--gold)}
+.pack .new small{font-size:14px;color:var(--txt)}
+.badge{position:absolute;top:-10px;right:12px;background:var(--gold);color:#000;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px}
+.pack .pick{font-size:13px;color:var(--gold);font-weight:700}
+/* compteur */
+.zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.zone{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.zone h3{font-size:18px;margin-bottom:2px}
+.zone .q{color:var(--mute);font-size:13px;margin-bottom:12px}
+.bar{height:10px;background:#222;border-radius:99px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:99px;transition:width .6s}
+.zone .meta{font-size:13px;color:var(--mute)}
+.zone .meta b{color:var(--gold)}
+.zone .dates{margin-top:8px;font-size:13px}
+.zone .ok{color:#9be3b5;font-weight:700}
+.rule{max-width:640px;margin:20px auto 0;text-align:center;font-size:14px;color:var(--mute)}
+.rule b{color:var(--gold)}
+/* form */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;max-width:720px;margin:0 auto}
+label.l{display:block;font-size:13px;color:var(--mute);margin:14px 0 6px}
+input[type=text],input[type=tel],select{width:100%;background:#0d0d0d;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:13px;font-size:16px;font-family:inherit}
+input:focus,select:focus{outline:2px solid var(--gold);border-color:transparent}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.row2{grid-template-columns:1fr}}
+.svc{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);gap:10px}
+.svc .n{flex:1;font-size:15px}
+.svc .n small{display:block;color:var(--mute);font-size:12px}
+.step{display:flex;align-items:center;gap:10px}
+.step button{width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:20px;line-height:1;cursor:pointer}
+.step span{min-width:18px;text-align:center;font-weight:700}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;font-size:14px;color:var(--txt)}
+.chk input{margin-top:4px;accent-color:var(--gold);width:18px;height:18px}
+.sum{background:#0d0d0d;border:1px solid var(--gold);border-radius:12px;padding:14px;margin:18px 0}
+.sum .r{display:flex;justify-content:space-between;font-size:15px;padding:3px 0}
+.sum .r.t{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:800;font-size:20px;color:var(--gold);font-family:Georgia,serif}
+.sum .r.save{color:#9be3b5}
+.note{font-size:12px;color:var(--mute);margin-top:8px}
+.err{color:#ff8c8c;font-size:13px;margin-top:8px;display:none}
+/* how / footer */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+.st b{display:block;font-family:Georgia,serif;font-size:30px;color:var(--gold)}
+footer{padding:30px 0 90px;border-top:1px solid var(--line);text-align:center;color:var(--mute);font-size:13px}
+footer .logo{margin-bottom:14px}
+.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(10,10,10,.96);border-top:1px solid var(--line);z-index:30;display:flex;gap:10px}
+.sticky a{flex:1}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="logo" aria-label="Devousamoijobbing">DE V<svg viewBox="0 0 12 16" aria-hidden="true"><path fill="#1A6B3C" d="M6 0C2.7 0 0 2.6 0 5.8 0 10.2 6 16 6 16s6-5.8 6-10.2C12 2.6 9.3 0 6 0zm0 8.3a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>US AMO<i>i</i> JOBBING <span class="arr">⇄</span></span>
+    <a class="btn sm" href="#reserver">Réserver</a>
+  </div>
+</header>
+
+<main>
+<div class="hero"><div class="wrap">
+  <span class="tag">Black Friday Noir &amp; Or · 12 → 27 novembre</span>
+  <h1>Le Black Friday <em>commence chez nous.</em></h1>
+  <div class="big"><small>JUSQU'À</small>-25%</div>
+  <p class="sub">Matelas, canapés, salons : un résultat visible dès le premier passage. Pointe-Noire, à domicile. <b>18 créneaux seulement.</b></p>
+  <div class="early" id="early">🎁 Offre Early Bird : parfumage du matelas offert pour toute réservation avant dimanche 15 novembre.</div>
+  <a class="btn" href="#reserver">Réserver dès maintenant</a>
+  <div class="cd" id="cd" aria-live="polite">
+    <div><b id="d">--</b><span>jours</span></div><div><b id="h">--</b><span>heures</span></div><div><b id="m">--</b><span>min</span></div><div><b id="s">--</b><span>sec</span></div>
+  </div>
+  <div class="cdlabel" id="cdlabel">avant la clôture des réservations · vendredi 27 novembre, 18h</div>
+</div></div>
+
+<section id="packs"><div class="wrap">
+  <h2>Les packs Noir &amp; Or</h2>
+  <p class="lead">Touchez un pack pour le sélectionner, puis réservez en 30 secondes.</p>
+  <div class="packs" id="packs-grid"></div>
+  <p class="rule">Pour 1 seule prestation : <b>-15%</b> · dès 2 prestations : <b>-20%</b> · Mission Quartier (3 foyers) : <b>-25%</b>.<br>Offre non cumulable avec la remise permanente matelas.</p>
+</div></section>
+
+<section id="quartier"><div class="wrap">
+  <h2>Le Compteur du Quartier</h2>
+  <p class="lead">Quand 3 foyers d'un même quartier réservent la même tournée, tout le monde passe à <b style="color:var(--gold)">-25%</b>. Invitez vos voisins.</p>
+  <div class="zones" id="zones"></div>
+</div></section>
+
+<section id="reserver"><div class="wrap">
+  <h2>Réservez votre créneau</h2>
+  <p class="lead">Votre demande part directement sur notre WhatsApp. Nous confirmons la veille. Paiement à la fin de la prestation.</p>
+  <form class="card" id="form" novalidate>
+    <div class="row2">
+      <div><label class="l" for="nom">Votre nom</label><input type="text" id="nom" autocomplete="name" placeholder="Ex : Mme Nganga"></div>
+      <div><label class="l" for="tel">Téléphone / WhatsApp</label><input type="tel" id="tel" autocomplete="tel" placeholder="Ex : 06 000 00 00"></div>
+    </div>
+    <div class="row2">
+      <div><label class="l" for="zone">Votre zone</label><select id="zone"></select></div>
+      <div><label class="l" for="quartier">Votre quartier / rue</label><input type="text" id="quartier" placeholder="Ex : Ngoyo, arrêt Orphelinat"></div>
+    </div>
+    <label class="l" for="jour">Tournée souhaitée</label>
+    <select id="jour"></select>
+
+    <label class="l" style="margin-top:20px">Choisissez un pack ou composez votre prestation</label>
+    <div id="packsel" class="note" style="margin:0 0 8px"></div>
+    <div id="svcs"></div>
+
+    <label class="chk"><input type="checkbox" id="mission"> <span>Je veux rejoindre une <b>Mission Quartier</b> (mes voisins réservent aussi) : remise -25% confirmée dès 3 foyers.</span></label>
+
+    <div class="sum" id="sum"></div>
+    <div class="err" id="err"></div>
+    <button type="submit" class="btn wa" style="width:100%">Envoyer ma réservation sur WhatsApp</button>
+    <p class="note">Estimation indicative, confirmée par notre équipe. Tapis et prestations spéciales : sur devis.</p>
+  </form>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Comment ça marche</h2><p class="lead">Simple, rapide, sans surprise.</p>
+  <div class="steps">
+    <div class="st"><b>1</b>Vous choisissez votre pack et votre tournée</div>
+    <div class="st"><b>2</b>Vous envoyez la demande sur WhatsApp</div>
+    <div class="st"><b>3</b>Nous confirmons la veille, notre équipe intervient chez vous</div>
+    <div class="st"><b>4</b>Vous payez à la fin, satisfait du résultat</div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <span class="logo">DE VOUS AMO<i>i</i> JOBBING</span>
+  <p>Notre mission, votre confort · Plus de 150 familles et entreprises nous font confiance.</p>
+  <p>WhatsApp (+242) 04 061 23 50 · Tél (+242) 06 913 63 64</p>
+  <p>Arrêt Orphelinat, Ngoyo, Pointe-Noire, République du Congo</p>
+</div></footer>
+
+<div class="sticky"><a class="btn" href="#reserver">Réserver -25%</a><a class="btn wa" href="https://wa.me/242040612350?text=Bonjour%2C%20je%20souhaite%20profiter%20du%20Black%20Friday%20Noir%20%26%20Or." target="_blank" rel="noopener">WhatsApp</a></div>
+
+<script>
+/* =====================================================================
+   RÉGLAGES. Le nombre de foyers (booked) est maintenant mis à jour
+   automatiquement depuis /api/compteur (page privée /blackfriday/admin).
+   ===================================================================== */
+const CONFIG = {
+  whatsapp: "242040612350",
+  endISO: "2026-11-27T18:00:00+01:00",
+  earlyEndISO: "2026-11-15T23:59:59+01:00",
+  slotsTotal: 18,
+  zones: [
+    {id:"A", name:"Zone A", quartiers:"Ngoyo · Tchimbamba", booked:0, tours:["Sam 14 nov","Sam 21 nov"]},
+    {id:"B", name:"Zone B", quartiers:"Mpita · Centre-ville · La Base", booked:0, tours:["Lun 16 nov","Lun 23 nov"]},
+    {id:"C", name:"Zone C", quartiers:"OCH · Tié-Tié · Fouks", booked:0, tours:["Mar 17 nov","Mar 24 nov"]}
+  ]
+};
+const PACKS = [
+  {id:"matelas", name:"Pack Matelas", inc:"1 matelas 2 places", list:15000, price:12000, rate:.20},
+  {id:"duo", name:"Pack Duo", inc:"1 canapé 3 places + 1 matelas 2 places", list:35000, price:28000, rate:.20},
+  {id:"prestige", name:"Salon Prestige", inc:"Salon complet (3P+2P+1P) + 1 matelas 2 places", list:45000, price:36000, rate:.20, star:true},
+  {id:"maison", name:"Maison Complète", inc:"Salon complet + 2 matelas 2 places + 4 chaises", list:72000, price:54000, rate:.25}
+];
+const SERVICES = [
+  {id:"c3", name:"Canapé 3 places", p:20000},
+  {id:"cl", name:"Canapé en L", p:25000},
+  {id:"sa", name:"Salon complet", sub:"3P + 2P + 1P", p:30000},
+  {id:"sc", name:"Salon complet en cuir", p:35000},
+  {id:"m1", name:"Matelas 1 place", p:10000},
+  {id:"m2", name:"Matelas 2 places", p:15000},
+  {id:"m3", name:"Matelas 3 places", p:20000},
+  {id:"fa", name:"Fauteuil", p:7500},
+  {id:"ch", name:"Chaise", p:3000},
+  {id:"ri", name:"Rideaux", sub:"par pièce", p:5000},
+  {id:"vo", name:"Voilage", sub:"par pièce", p:3000}
+];
+/* ============================ code ============================ */
+const $ = id => document.getElementById(id);
+const fmt = n => Math.round(n).toLocaleString("fr-FR").replace(/ | /g," ") + " FCFA";
+const round500 = n => Math.round(n/500)*500;
+const qty = {}; SERVICES.forEach(s=>qty[s.id]=0);
+let pack = null;
+
+/* countdown */
+const end = new Date(CONFIG.endISO).getTime();
+function tick(){
+  let t = end - Date.now();
+  if(t<=0){ ["d","h","m","s"].forEach(i=>$(i).textContent="0"); $("cdlabel").textContent="Les réservations Black Friday sont closes. Merci !"; return; }
+  const d=Math.floor(t/864e5), h=Math.floor(t%864e5/36e5), m=Math.floor(t%36e5/6e4), s=Math.floor(t%6e4/1e3);
+  $("d").textContent=d; $("h").textContent=String(h).padStart(2,"0"); $("m").textContent=String(m).padStart(2,"0"); $("s").textContent=String(s).padStart(2,"0");
+}
+tick(); setInterval(tick,1000);
+if(Date.now()<=new Date(CONFIG.earlyEndISO).getTime()) $("early").classList.add("on");
+
+/* packs */
+function renderPacks(){
+  $("packs-grid").innerHTML = PACKS.map(p=>`
+    <div class="pack ${pack===p.id?'sel':''}" data-id="${p.id}" role="button" tabindex="0">
+      ${p.star?'<span class="badge">Le plus choisi</span>':''}
+      <h3>${p.name}</h3><div class="inc">${p.inc}</div>
+      <div class="old">${fmt(p.list)}</div>
+      <div class="new">${p.price.toLocaleString("fr-FR").replace(/ | /g," ")} <small>FCFA · -${Math.round(p.rate*100)}%</small></div>
+      <div class="pick">${pack===p.id?'✓ Sélectionné':'Choisir ce pack →'}</div>
+    </div>`).join("");
+  document.querySelectorAll(".pack").forEach(el=>{
+    const go=()=>{selectPack(el.dataset.id);$("reserver").scrollIntoView({behavior:"smooth"})};
+    el.addEventListener("click",go); el.addEventListener("keydown",e=>{if(e.key==="Enter")go()});
+  });
+}
+function selectPack(id){
+  pack = (pack===id)?null:id;
+  if(pack) SERVICES.forEach(s=>qty[s.id]=0);
+  renderPacks(); renderSvcs(); calc();
+}
+
+/* services */
+function renderSvcs(){
+  $("packsel").textContent = pack ? "Pack sélectionné : "+PACKS.find(p=>p.id===pack).name+" (touchez + pour passer en sur-mesure)" : "";
+  $("svcs").innerHTML = SERVICES.map(s=>`
+    <div class="svc"><div class="n">${s.name}${s.sub?`<small>${s.sub}</small>`:""}<small>${fmt(s.p)}</small></div>
+    <div class="step"><button type="button" data-a="-" data-s="${s.id}" aria-label="Moins">−</button><span id="q-${s.id}">${qty[s.id]}</span><button type="button" data-a="+" data-s="${s.id}" aria-label="Plus">+</button></div></div>`).join("");
+  document.querySelectorAll(".step button").forEach(b=>b.addEventListener("click",()=>{
+    const id=b.dataset.s;
+    if(pack){pack=null;renderPacks();$("packsel").textContent=""}
+    qty[id]=Math.max(0,qty[id]+(b.dataset.a==="+"?1:-1));
+    $("q-"+id).textContent=qty[id]; calc();
+  }));
+}
+
+/* calc */
+function state(){
+  let list=0, rate=0, lines=0, label="";
+  if(pack){const p=PACKS.find(x=>x.id===pack);list=p.list;rate=p.rate;lines=1;label=p.name+" ("+p.inc+")";}
+  else{
+    const parts=[];
+    SERVICES.forEach(s=>{if(qty[s.id]>0){list+=s.p*qty[s.id];lines++;parts.push(qty[s.id]+" × "+s.name)}});
+    rate = lines>=2?.20:(lines===1?.15:0); label=parts.join(", ");
+  }
+  const mission=$("mission").checked;
+  if(mission && list>0) rate=.25;
+  const total = list>0 ? round500(list*(1-rate)) : 0;
+  return {list,rate,total,label,mission,lines};
+}
+function calc(){
+  const s=state();
+  if(!s.list){ $("sum").innerHTML='<div class="r"><span>Sélectionnez un pack ou une prestation</span></div>'; return s; }
+  $("sum").innerHTML = `
+    <div class="r"><span>Prix normal</span><span>${fmt(s.list)}</span></div>
+    <div class="r save"><span>Remise Black Friday -${Math.round(s.rate*100)}%</span><span>- ${fmt(s.list-s.total)}</span></div>
+    <div class="r t"><span>Total estimé</span><span>${fmt(s.total)}</span></div>`;
+  return s;
+}
+$("mission").addEventListener("change",calc);
+
+/* zones & tournées */
+function nextSlots(){const used=CONFIG.zones.reduce((a,z)=>a+z.booked,0);return Math.max(0,CONFIG.slotsTotal-used)}
+let countsLoaded=false;
+function renderZones(){
+  const keepZone=$("zone").value, keepJour=$("jour").value;
+  $("zones").innerHTML = CONFIG.zones.map(z=>{
+    const pct=countsLoaded?Math.min(100,Math.round(z.booked/3*100)):0, left=Math.max(0,3-z.booked);
+    return `<div class="zone"><h3>${z.name}</h3><div class="q">${z.quartiers}</div>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+      <div class="meta">${!countsLoaded?'Rejoignez la Mission Quartier de votre zone : -25% dès 3 foyers':(z.booked>=3?'<span class="ok">✓ Tournée confirmée : -25% pour tous</span>':`<b>${z.booked}/3</b> foyers · encore <b>${left}</b> pour débloquer le -25%`)}</div>
+      <div class="dates">Tournées : ${z.tours.join(" · ")}</div></div>`}).join("");
+  $("zone").innerHTML = '<option value="">Choisir…</option>'+CONFIG.zones.map(z=>`<option value="${z.id}">${z.name} — ${z.quartiers}</option>`).join("")+'<option value="AUTRE">Autre quartier (nous contacter)</option>';
+  if(!$("zone").dataset.bound){
+    $("zone").dataset.bound="1";
+    $("zone").addEventListener("change",()=>{
+      const z=CONFIG.zones.find(x=>x.id===$("zone").value);
+      $("jour").innerHTML = z ? '<option value="">Choisir…</option>'+z.tours.map(t=>`<option>${t}</option>`).join("") : '<option value="">Nous vous proposerons une date</option>';
+    });
+    $("jour").innerHTML='<option value="">Choisissez d\'abord votre zone</option>';
+  }
+  if(keepZone){ $("zone").value=keepZone; if(keepJour) $("jour").value=keepJour; }
+}
+
+/* compteur en direct (mis à jour par l'équipe via /blackfriday/admin) */
+async function loadCounts(){
+  try{
+    const r=await fetch("/api/compteur",{cache:"no-store"});
+    if(!r.ok) return;
+    const d=await r.json();
+    CONFIG.zones.forEach(z=>{ if(typeof d[z.id]==="number") z.booked=d[z.id]; });
+    countsLoaded=true; renderZones();
+  }catch(e){ /* hors ligne : on garde l'affichage neutre */ }
+}
+
+/* envoi WhatsApp */
+$("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const s=calc(), err=$("err"); err.style.display="none";
+  const nom=$("nom").value.trim(), tel=$("tel").value.trim(), zone=$("zone").value, q=$("quartier").value.trim(), jour=$("jour").value;
+  let m="";
+  if(!nom) m="Indiquez votre nom."; else if(tel.replace(/\D/g,"").length<8) m="Indiquez un numéro WhatsApp valide."; else if(!zone) m="Choisissez votre zone."; else if(!s.list) m="Sélectionnez un pack ou au moins une prestation.";
+  if(m){err.textContent=m;err.style.display="block";return}
+  const zname=(CONFIG.zones.find(x=>x.id===zone)||{name:"Autre zone",quartiers:""});
+  const msg =
+`Bonjour Devousamoijobbing, je réserve pour le *Black Friday Noir & Or*.
+
+Nom : ${nom}
+Tél : ${tel}
+Zone : ${zname.name} ${zname.quartiers?("("+zname.quartiers+")"):""}
+Quartier / rue : ${q||"à préciser"}
+Tournée souhaitée : ${jour||"à convenir"}
+
+Prestations : ${s.label}
+Prix normal : ${fmt(s.list)}
+Remise : -${Math.round(s.rate*100)}%
+Total estimé : ${fmt(s.total)}
+${s.mission?"Mission Quartier : oui (mes voisins réservent aussi)\n":""}
+Merci de me confirmer mon créneau.`;
+  window.open("https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg),"_blank");
+});
+
+renderPacks(); renderSvcs(); renderZones(); calc(); loadCounts(); setInterval(loadCounts,60000);
+</script>
+</body>
+</html>
