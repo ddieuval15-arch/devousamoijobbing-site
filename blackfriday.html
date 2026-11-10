@@ -50,6 +50,7 @@ section .lead{text-align:center;color:var(--mute);max-width:560px;margin:0 auto 
 .pack h3{font-size:20px}
 .pack .inc{color:var(--mute);font-size:14px;flex:1}
 .pack .old{text-decoration:line-through;color:var(--mute);font-size:14px}
+.pack .old b{display:inline-block;text-decoration:none;background:var(--gold);color:#000;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:1px}
 .pack .new{font-family:Georgia,serif;font-size:30px;color:var(--gold)}
 .pack .new small{font-size:14px;color:var(--txt)}
 .badge{position:absolute;top:-10px;right:12px;background:var(--gold);color:#000;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px}
@@ -243,8 +244,8 @@ function renderPacks(){
     <div class="pack ${pack===p.id?'sel':''}" data-id="${p.id}" role="button" tabindex="0">
       ${p.star?'<span class="badge">Le plus choisi</span>':''}
       <h3>${p.name}</h3><div class="inc">${p.inc}</div>
-      <div class="old">${fmt(p.list)}</div>
-      <div class="new">${p.price.toLocaleString("fr-FR").replace(/ | /g," ")} <small>FCFA · -${Math.round(p.rate*100)}%</small></div>
+      <div class="old">${fmt(p.list)}<b>-${Math.round(p.rate*100)}%</b></div>
+      <div class="new">${p.price.toLocaleString("fr-FR").replace(/ | /g," ")} <small>FCFA</small></div>
       <div class="pick">${pack===p.id?'✓ Sélectionné':'Choisir ce pack →'}</div>
     </div>`).join("");
   document.querySelectorAll(".pack").forEach(el=>{
