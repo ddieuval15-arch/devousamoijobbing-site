@@ -511,12 +511,34 @@ footer{background:var(--bg2);border-top:1px solid var(--bord);padding:48px 60px 
 #cg-banner .cg-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(10,10,10,.18);border:none;color:#0A0A0A;width:22px;height:22px;border-radius:50%;font-size:14px;line-height:20px;cursor:pointer;}
 #cg-banner .cg-close:hover{background:rgba(10,10,10,.3);}
 @media(max-width:480px){#cg-banner{font-size:11.5px;padding:10px 38px;}}
+/* Black Friday : le bandeau remplace le message habituel du 12/11 08h au 27/11 18h */
+#cg-banner.bf{background:#0A0A0A;color:#F5C518;border-bottom:1px solid rgba(245,197,24,.5);}
+#cg-banner.bf span{text-shadow:none;}
+#cg-banner.bf b{color:#fff;}
+#cg-banner.bf .bf-cta{display:inline-block;margin-left:8px;background:#F5C518;color:#0A0A0A;padding:3px 12px;border-radius:999px;text-decoration:none;font-weight:800;white-space:nowrap;}
+#cg-banner.bf .cg-close{background:rgba(245,197,24,.2);color:#F5C518;}
 </style>
 <div id="cg-banner">
   <span>🇨🇬 15 Août — Fête de l'Indépendance de la République du Congo. Devousamoijobbing vous souhaite une belle célébration à tous les Congolais !</span>
   <button class="cg-close" aria-label="Fermer la bannière">×</button>
 </div>
-<script>(function(){var b=document.getElementById('cg-banner');if(!b)return;if(localStorage.getItem('cgBannerClosed')==='1'){b.style.display='none';return;}var c=b.querySelector('.cg-close');c.addEventListener('click',function(){b.style.display='none';localStorage.setItem('cgBannerClosed','1');});})();</script>
+<script>(function(){
+var b=document.getElementById('cg-banner');if(!b)return;
+var now=Date.now();
+var start=new Date('2026-11-13T08:00:00+01:00').getTime();
+var end=new Date('2026-11-27T18:00:00+01:00').getTime();
+var bf=(now>=start&&now<end);
+var key=bf?'bfBannerClosed':'cgBannerClosed';
+if(bf){
+  b.classList.add('bf');
+  var sp=b.querySelector('span');
+  sp.innerHTML='🔥 <b>Black Friday</b> : jusqu\'à -25% jusqu\'au 27 novembre <a class="bf-cta" href="/blackfriday.html">Réserver →</a>';
+}
+var closed='0';try{closed=localStorage.getItem(key);}catch(e){}
+if(closed==='1'){b.style.display='none';return;}
+var c=b.querySelector('.cg-close');
+c.addEventListener('click',function(){b.style.display='none';try{localStorage.setItem(key,'1');}catch(e){}});
+})();</script>
 <!-- FIN BANNIÈRE -->
 
 <div id="sp"></div>
